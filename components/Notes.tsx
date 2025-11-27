@@ -1,5 +1,5 @@
 function Notes() {
-  return <div className="bg-orange-400">Notes</div>;
+  return <div>Notes</div>;
 }
 
 export { Notes };

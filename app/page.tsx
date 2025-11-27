@@ -6,11 +6,11 @@ import { Sidebar } from "@/components/Sidebar";
 export default function page() {
   return (
     <>
-      <div className="bg-red-400">Placeholder</div>
-      <div className="bg-green-400">All Notes</div>
-      <div className="bg-yellow-400">Placeholder</div>
+      <div></div>
+      <div></div>
+      <div></div>
       <Sidebar />
-      <div className="bg-blue-400">Search</div>
+      <div></div>
       <Content />
       <Notes />
       <Breadcrumb />

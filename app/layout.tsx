@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className="dark">
-      <body className="grid grid-cols-[1fr_1fr_4fr] grid-rows-[auto_auto_1fr_auto] w-screen h-screen bg-background text-foreground">
+      <body className="grid grid-cols-[1fr_1fr_4fr] grid-rows-[50px_50px_1fr_50px] w-screen h-screen bg-background text-foreground">
         {children}
       </body>
     </html>
