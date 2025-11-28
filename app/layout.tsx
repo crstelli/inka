@@ -3,6 +3,12 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import { Geist } from "next/font/google";
+
+const geist = Geist({
+  subsets: ["latin"],
+});
+
 interface Props {
   children: ReactNode;
 }
@@ -14,8 +20,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en" className="dark">
-      <body className="grid grid-cols-[1fr_1fr_4fr] divide-solid divide-x divide-y grid-rows-[50px_50px_1fr_50px] w-screen h-screen bg-background text-foreground">
+    <html lang="en" className={`dark ${geist.className}`}>
+      <body className="grid grid-cols-[2fr_3fr_10fr] divide-solid divide-x divide-y grid-rows-[50px_50px_1fr_50px] w-screen h-screen bg-background text-foreground">
         {children}
       </body>
     </html>
