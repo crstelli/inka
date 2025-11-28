@@ -3,7 +3,7 @@ import { Menu, SquarePen } from "lucide-react";
 
 function AddNote() {
   return (
-    <div className="flex justify-between items-center p-4">
+    <div className="flex justify-between items-center px-4">
       <Button size="icon" variant="secondary">
         <Menu />
       </Button>
