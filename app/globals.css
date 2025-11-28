@@ -120,3 +120,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  *::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  *::-webkit-scrollbar-track {
+    @apply rounded-full bg-background;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-secondary;
+  }
+}
