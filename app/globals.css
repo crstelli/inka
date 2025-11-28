@@ -138,6 +138,18 @@
 .tiptap {
   @apply focus:outline-none;
 
+  h1 {
+    @apply text-3xl font-semibold my-4;
+  }
+
+  h2 {
+    @apply text-xl font-medium;
+  }
+
+  h3 {
+    @apply text-lg font-medium;
+  }
+
   p {
     @apply text-secondary-foreground;
   }
