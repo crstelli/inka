@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Content } from "@/components/Content";
 import { NoteHeading } from "@/components/NoteHeading";
 import { Notes } from "@/components/Notes";
+import { Search } from "@/components/Search";
 import { Sidebar } from "@/components/Sidebar";
 
 export default function page() {
@@ -12,7 +13,7 @@ export default function page() {
       <AddNote />
       <NoteHeading />
       <Sidebar />
-      <div></div>
+      <Search />
       <Content />
       <Notes />
       <Breadcrumb />
