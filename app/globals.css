@@ -139,15 +139,15 @@
   @apply focus:outline-none;
 
   h1 {
-    @apply text-3xl font-semibold my-4;
+    @apply text-4xl font-semibold my-4 first:mt-0;
   }
 
   h2 {
-    @apply text-xl font-medium;
+    @apply text-xl font-medium my-3 first:mt-0;
   }
 
   h3 {
-    @apply text-lg font-medium;
+    @apply text-lg font-medium my-2 first:mt-0;
   }
 
   p {
