@@ -19,12 +19,8 @@ function Content() {
   });
 
   return (
-    <div className="row-span-2">
-      {editor && (
-        <FloatingMenu editor={editor}>
-          <Button size={"sm"}>H1</Button>
-        </FloatingMenu>
-      )}
+    <div className="row-span-2 w-full overflow-auto">
+      {editor && <FloatingMenu editor={editor}></FloatingMenu>}
       <EditorContent editor={editor} />
     </div>
   );
