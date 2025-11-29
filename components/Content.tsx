@@ -55,10 +55,12 @@ function Content() {
     clearEditor();
   }
 
+  // Sync editor with editorStore.
   useEffect(() => {
     if (editor) setEditor(editor);
   }, [editor, setEditor]);
 
+  // Sync editor with current selected note.
   useEffect(() => {
     if (currentNote) setContent(currentNote?.content);
     else clearEditor();
