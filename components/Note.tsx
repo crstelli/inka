@@ -6,7 +6,7 @@ interface Props {
 
 function Note({ note }: Props) {
   return (
-    <div className="bg-secondary h-25 rounded-md p-3 flex flex-col">
+    <div className="bg-secondary h-25 rounded-md p-3 flex flex-col cursor-pointer">
       <h3 className="font-medium">{note.title}</h3>
       <span className="text-muted-foreground">{note.description || "No description provided"}</span>
     </div>

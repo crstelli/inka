@@ -37,9 +37,10 @@ function Content() {
 
   function handleSave() {
     const content = editor?.getJSON();
-    if (!content) return;
+    if (!content || !editor) return;
 
     addNote(content);
+    editor.commands.clearContent();
   }
 
   return (
