@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useNotes } from "@/stores/notesStore";
+import { useState } from "react";
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
@@ -8,7 +9,7 @@ import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "./FloatingMenu";
 import { Button } from "./ui/button";
-import { useNotes } from "./notesContext/Provider";
+import { createNote } from "@/lib/createNote";
 
 function Content() {
   const [showSave, setShowSave] = useState(false);
@@ -40,7 +41,9 @@ function Content() {
     const content = editor?.getJSON();
     if (!content || !editor) return;
 
-    addNote(content);
+    const newNote = createNote({ content });
+
+    addNote(newNote);
     editor.commands.clearContent();
   }
 
