@@ -1,9 +1,9 @@
 "use client";
 
-import { Note } from "./Note";
-import { NotePlaceholder } from "./NotePlaceholder";
+import { useNotes } from "@/stores/notesStore";
 
-import { useNotes } from "./notesContext/Provider";
+import { Note } from "@/components/Note";
+import { NotePlaceholder } from "@/components/NotePlaceholder";
 
 function Notes() {
   const { notes } = useNotes();

@@ -1,7 +1,7 @@
 "use client";
 
 import type { Note } from "@/lib/noteType";
-import { useNotes } from "./notesContext/Provider";
+import { useNotes } from "@/stores/notesStore";
 
 interface Props {
   note: Note;

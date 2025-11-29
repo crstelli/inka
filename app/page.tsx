@@ -1,5 +1,3 @@
-import { NotesProvider } from "@/components/notesContext/Provider";
-
 import { AddNote } from "@/components/AddNote";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { Content } from "@/components/Content";
@@ -10,7 +8,7 @@ import { Sidebar } from "@/components/Sidebar";
 
 export default function page() {
   return (
-    <NotesProvider>
+    <>
       <div></div>
       <AddNote />
       <NoteHeading />
@@ -19,6 +17,6 @@ export default function page() {
       <Content />
       <Notes />
       <Breadcrumb />
-    </NotesProvider>
+    </>
   );
 }
