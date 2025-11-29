@@ -24,6 +24,9 @@ function NotesProvider({ children }: Props) {
     const note = {
       id: Date.now(),
       created_at: new Date(Date.now()).toISOString(),
+
+      title: "New Note",
+
       content,
     };
 
