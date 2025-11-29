@@ -1,6 +1,6 @@
 "use client";
 
-import { useEditor, EditorContent, useEditorState } from "@tiptap/react";
+import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
 import StarterKit from "@tiptap/starter-kit";
 
