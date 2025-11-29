@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 function Content() {
   const [showSave, setShowSave] = useState(false);
 
-  const { currentNote, addNote } = useNotes();
+  const { currentNote, clearCurrentNote, updateNote, addNote } = useNotes();
   const { setEditor, clearEditor, setContent } = useEditor();
 
   const editor = useEditorApi({
@@ -44,9 +44,14 @@ function Content() {
     const content = editor?.getJSON();
     if (!content || !editor) return;
 
-    const newNote = createNote({ content });
+    if (currentNote) {
+      updateNote(currentNote.id, content);
+      clearCurrentNote();
+    } else {
+      const newNote = createNote({ content });
+      addNote(newNote);
+    }
 
-    addNote(newNote);
     clearEditor();
   }
 
