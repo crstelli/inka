@@ -14,7 +14,7 @@ const NotesContext = createContext<null | { notes: Note[]; setNotes: Dispatch<Se
 function NotesProvider({ children }: Props) {
   const [notes, setNotes] = useState<Note[]>([]);
 
-  <NotesContext.Provider value={{ notes, setNotes }}>{children}</NotesContext.Provider>;
+  return <NotesContext.Provider value={{ notes, setNotes }}>{children}</NotesContext.Provider>;
 }
 
 function useNotes() {
