@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
@@ -12,7 +12,7 @@ import { useNotes } from "./notesContext/Provider";
 
 function Content() {
   const [showSave, setShowSave] = useState(false);
-  const { addNote } = useNotes();
+  const { currentNote, addNote } = useNotes();
 
   const editor = useEditor({
     extensions: [
@@ -33,6 +33,7 @@ function Content() {
 
     immediatelyRender: false,
   });
+
   if (!editor) return null;
 
   function handleSave() {
