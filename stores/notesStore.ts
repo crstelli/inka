@@ -20,21 +20,24 @@ export const useNotes = create(
     notes: [],
     currentNote: undefined,
 
+    // Notes state managment.
     addNote: (note) =>
       set((state) => {
         state.notes.push(note);
       }),
+
     updateNote: (id, content) =>
       set((state) => {
         const editedNote = state.notes.find((n) => n.id === id);
-
         if (editedNote) editedNote.content = content;
       }),
 
+    // Current note state managment.
     setCurrentNote: (note) =>
       set((state) => {
         state.currentNote = note;
       }),
+
     clearCurrentNote: () =>
       set((state) => {
         state.currentNote = undefined;
