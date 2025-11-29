@@ -8,9 +8,11 @@ import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "./FloatingMenu";
 import { Button } from "./ui/button";
+import { useNotes } from "./notesContext/Provider";
 
 function Content() {
   const [showSave, setShowSave] = useState(false);
+  const { addNote } = useNotes();
 
   const editor = useEditor({
     extensions: [
@@ -33,12 +35,23 @@ function Content() {
   });
   if (!editor) return null;
 
+  function handleSave() {
+    const content = editor?.getJSON();
+    if (!content) return;
+
+    addNote(content);
+  }
+
   return (
     <div className="row-span-2 w-full overflow-auto relative">
       {editor && <FloatingMenu editor={editor} />}
       <EditorContent editor={editor} />
 
-      {showSave && <Button className="absolute top-3 right-3">Save</Button>}
+      {showSave && (
+        <Button onClick={handleSave} className="absolute top-3 right-3">
+          Save
+        </Button>
+      )}
     </div>
   );
 }

@@ -1,20 +1,36 @@
 "use client";
 
-import { Note } from "@/lib/noteType";
+import type { ReactNode } from "react";
+import type { JSONContent } from "@tiptap/react";
 
 import { createContext, useContext, useState } from "react";
-import type { ReactNode, Dispatch, SetStateAction } from "react";
+import { Note } from "@/lib/noteType";
 
 interface Props {
   children: ReactNode;
 }
 
-const NotesContext = createContext<null | { notes: Note[]; setNotes: Dispatch<SetStateAction<Note[]>> }>(null);
+interface ContextProps {
+  notes: Note[];
+  addNote: (content: JSONContent) => void;
+}
+
+const NotesContext = createContext<null | ContextProps>(null);
 
 function NotesProvider({ children }: Props) {
   const [notes, setNotes] = useState<Note[]>([]);
 
-  return <NotesContext.Provider value={{ notes, setNotes }}>{children}</NotesContext.Provider>;
+  function addNote(content: JSONContent) {
+    const note = {
+      id: Date.now(),
+      created_at: new Date(Date.now()).toISOString(),
+      content,
+    };
+
+    setNotes((n) => [...n, note]);
+  }
+
+  return <NotesContext.Provider value={{ notes, addNote }}>{children}</NotesContext.Provider>;
 }
 
 function useNotes() {
