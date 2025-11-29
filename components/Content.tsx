@@ -1,21 +1,26 @@
 "use client";
 
-import { useNotes } from "@/stores/notesStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useNotes } from "@/stores/notesStore";
+import { useEditor } from "@/stores/editorStore";
+
+import { createNote } from "@/lib/createNote";
+
+import { useEditor as useEditorApi, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
 import StarterKit from "@tiptap/starter-kit";
 
-import { FloatingMenu } from "./FloatingMenu";
-import { Button } from "./ui/button";
-import { createNote } from "@/lib/createNote";
+import { FloatingMenu } from "@/components/FloatingMenu";
+import { Button } from "@/components/ui/button";
 
 function Content() {
   const [showSave, setShowSave] = useState(false);
-  const { currentNote, addNote } = useNotes();
 
-  const editor = useEditor({
+  const { currentNote, addNote } = useNotes();
+  const { setEditor, clearEditor, setContent } = useEditor();
+
+  const editor = useEditorApi({
     extensions: [
       StarterKit,
       Placeholder.configure({
@@ -35,8 +40,6 @@ function Content() {
     immediatelyRender: false,
   });
 
-  if (!editor) return null;
-
   function handleSave() {
     const content = editor?.getJSON();
     if (!content || !editor) return;
@@ -44,8 +47,19 @@ function Content() {
     const newNote = createNote({ content });
 
     addNote(newNote);
-    editor.commands.clearContent();
+    clearEditor();
   }
+
+  useEffect(() => {
+    if (editor) setEditor(editor);
+  }, [editor, setEditor]);
+
+  useEffect(() => {
+    if (currentNote) setContent(currentNote?.content);
+    else clearEditor();
+  }, [clearEditor, currentNote, setContent]);
+
+  if (!editor) return null;
 
   return (
     <div className="row-span-2 w-full overflow-auto relative">

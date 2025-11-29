@@ -1,4 +1,4 @@
-import { Note } from "@/lib/noteType";
+import type { Note } from "@/lib/noteType";
 import { create } from "zustand";
 
 interface NotesState {
@@ -10,9 +10,9 @@ interface NotesState {
 }
 
 export const useNotes = create<NotesState>((set) => ({
-  notes: <Note[]>[],
+  notes: [],
   currentNote: undefined,
 
-  addNote: (note: Note) => set((state) => ({ notes: [...state.notes, note] })),
-  setCurrentNote: (note: Note) => set(() => ({ currentNote: note })),
+  addNote: (note) => set((state) => ({ notes: [...state.notes, note] })),
+  setCurrentNote: (note) => set(() => ({ currentNote: note })),
 }));
