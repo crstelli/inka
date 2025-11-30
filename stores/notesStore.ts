@@ -19,6 +19,7 @@ interface NotesState {
 
   getNote: (id: number | undefined) => Note | undefined;
   addNote: (note: Note) => void;
+  deleteNote: (id: number) => void;
   updateNote: ({ id, content, title }: UpdateNoteParams) => void;
 
   setOpenNote: (id: number) => void;
@@ -36,6 +37,11 @@ const useNotesStore = create(
     addNote: (note) =>
       set((state) => {
         state.notes.push(note);
+      }),
+
+    deleteNote: (id) =>
+      set((state) => {
+        state.notes = state.notes.filter((n) => n.id !== id);
       }),
 
     updateNote: ({ id, content, title }) =>
@@ -62,6 +68,7 @@ const useNotesStore = create(
 
 export const useNotes = () => useNotesStore((state) => state.notes);
 export const useAddNote = () => useNotesStore((state) => state.addNote);
+export const useDeleteNote = () => useNotesStore((state) => state.deleteNote);
 export const useUpdateNote = () => useNotesStore((state) => state.updateNote);
 
 export const useOpenNote = () => useNotesStore((state) => state.getNote(state.openNote));

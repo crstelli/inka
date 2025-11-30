@@ -22,7 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Note } from "@/lib/noteType";
-import { useOpenNote, useSetOpenNote } from "@/stores/notesStore";
+import { useDeleteNote, useOpenNote, useSetOpenNote } from "@/stores/notesStore";
 import { Edit, EllipsisVertical, Heading, Trash } from "lucide-react";
 
 interface Props {
@@ -30,18 +30,24 @@ interface Props {
 }
 
 function Note({ note }: Props) {
+  const deleteNote = useDeleteNote();
+
   const openNote = useOpenNote();
-  const setopenNote = useSetOpenNote();
+  const setOpenNote = useSetOpenNote();
 
   const isActive = openNote?.id === note.id;
 
-  function handleSetNote() {
-    setopenNote(note.id);
+  function handleDeleteNote() {
+    deleteNote(note.id);
+  }
+
+  function handleOpenNote() {
+    setOpenNote(note.id);
   }
 
   return (
     <div
-      onClick={handleSetNote}
+      onClick={handleOpenNote}
       className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
         isActive ? "bg-background" : "bg-secondary border-transparent"
       }`}
@@ -86,7 +92,7 @@ function Note({ note }: Props) {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction asChild>
-              <Button variant="destructive">
+              <Button variant="destructive" onClick={handleDeleteNote}>
                 <Trash />
                 Delete
               </Button>
