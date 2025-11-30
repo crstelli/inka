@@ -6,8 +6,11 @@ import { useNotes } from "@/stores/notesStore";
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Pen, Save } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 function ContentHeading() {
+  const [isEditing, setIsEditing] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
 
   const { currentNote, updateNote, clearCurrentNote, addNote } = useNotes();
@@ -22,7 +25,7 @@ function ContentHeading() {
     if (!content || !editor) return;
 
     if (currentNote) {
-      updateNote(currentNote.id, content);
+      updateNote({ id: currentNote.id, content });
       clearCurrentNote();
     } else {
       const newNote = createNote({ content });
@@ -36,7 +39,23 @@ function ContentHeading() {
     <div className="bg-secondary flex items-center justify-between px-12">
       {!isEmpty && (
         <>
-          <h1 className="text-xl">New Note</h1>
+          <div className="flex items-center gap-4">
+            {isEditing ? (
+              <>
+                <Button onClick={() => setIsEditing(false)} variant={"outline"} size="icon">
+                  <Save />
+                </Button>
+                <Input />
+              </>
+            ) : (
+              <>
+                <Button onClick={() => setIsEditing(true)} variant={"outline"} size="icon">
+                  <Pen />
+                </Button>
+                <h1 className="text-xl">New Note</h1>
+              </>
+            )}
+          </div>
           <Button onClick={handleSave}>Save</Button>
         </>
       )}
