@@ -7,11 +7,12 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Note } from "@/lib/noteType";
 import { useOpenNote, useSetOpenNote } from "@/stores/notesStore";
-import { EllipsisVertical } from "lucide-react";
+import { Edit, EllipsisVertical, Heading, Trash } from "lucide-react";
 
 interface Props {
   note: Note;
@@ -44,10 +45,20 @@ function Note({ note }: Props) {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>Note Option</DropdownMenuLabel>
+            <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>Edit title</DropdownMenuItem>
-              <DropdownMenuItem>Edit description</DropdownMenuItem>
-              <DropdownMenuItem>Delete</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Heading />
+                Edit Title
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Edit />
+                Edit Description
+              </DropdownMenuItem>
+              <DropdownMenuItem variant="destructive">
+                <Trash />
+                Delete
+              </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
