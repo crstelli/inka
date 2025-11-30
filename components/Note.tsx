@@ -1,14 +1,15 @@
 "use client";
 
 import type { Note } from "@/lib/noteType";
-import { useNotes } from "@/stores/notesStore";
+import { useCurrentNote, useSetCurrentNote } from "@/stores/notesStore";
 
 interface Props {
   note: Note;
 }
 
 function Note({ note }: Props) {
-  const { setCurrentNote, currentNote } = useNotes();
+  const currentNote = useCurrentNote();
+  const setCurrentNote = useSetCurrentNote();
 
   const isActive = currentNote?.id === note.id;
 
