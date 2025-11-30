@@ -13,6 +13,7 @@ import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "@/components/FloatingMenu";
 import { Button } from "@/components/ui/button";
+import { ContentHeading } from "@/components/ContentHeading";
 
 function Content() {
   const [showSave, setShowSave] = useState(false);
@@ -29,7 +30,7 @@ function Content() {
     ],
     editorProps: {
       attributes: {
-        class: "p-12",
+        class: "py-8 px-16",
       },
     },
 
@@ -69,16 +70,13 @@ function Content() {
   if (!editor) return null;
 
   return (
-    <div className="row-span-2 w-full overflow-auto relative">
-      {editor && <FloatingMenu editor={editor} />}
-      <EditorContent editor={editor} />
-
-      {showSave && (
-        <Button onClick={handleSave} className="absolute top-3 right-3">
-          Save
-        </Button>
-      )}
-    </div>
+    <>
+      <ContentHeading>{showSave && <Button onClick={handleSave}>Save</Button>}</ContentHeading>
+      <div className="w-full overflow-auto">
+        {editor && <FloatingMenu editor={editor} />}
+        <EditorContent editor={editor} />
+      </div>
+    </>
   );
 }
 

@@ -9,7 +9,7 @@ function Notes() {
   const { notes } = useNotes();
 
   return (
-    <div className="p-4 flex flex-col gap-4 overflow-auto">
+    <div className="p-4 flex flex-col gap-4 overflow-auto col-start-2 row-start-3">
       {notes.length > 0 ? notes.map((n) => <Note key={n.id} note={n} />) : <NotePlaceholder />}
     </div>
   );
