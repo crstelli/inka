@@ -1,7 +1,17 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import type { Note } from "@/lib/noteType";
 import { useOpenNote, useSetOpenNote } from "@/stores/notesStore";
+import { EllipsisVertical } from "lucide-react";
 
 interface Props {
   note: Note;
@@ -20,11 +30,28 @@ function Note({ note }: Props) {
   return (
     <div
       onClick={handleSetNote}
-      className={`h-25 rounded-md p-3 border flex flex-col cursor-pointer ${
+      className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
         isActive ? "bg-background" : "bg-secondary border-transparent"
       }`}
     >
-      <h3 className="font-medium">{note.title}</h3>
+      <div className="flex items-center justify-between">
+        <h3 className="font-medium">{note.title}</h3>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon-sm">
+              <EllipsisVertical />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>Note Option</DropdownMenuLabel>
+            <DropdownMenuGroup>
+              <DropdownMenuItem>Edit title</DropdownMenuItem>
+              <DropdownMenuItem>Edit description</DropdownMenuItem>
+              <DropdownMenuItem>Delete</DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <span className="text-muted-foreground">{note.description || "No description provided"}</span>
     </div>
   );
