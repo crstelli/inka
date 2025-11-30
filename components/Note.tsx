@@ -1,5 +1,16 @@
 "use client";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -35,35 +46,52 @@ function Note({ note }: Props) {
         isActive ? "bg-background" : "bg-secondary border-transparent"
       }`}
     >
-      <div className="flex items-center justify-between">
-        <h3 className="font-medium">{note.title}</h3>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon-sm">
-              <EllipsisVertical />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Note Option</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Heading />
-                Edit Title
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Edit />
-                Edit Description
-              </DropdownMenuItem>
-              <DropdownMenuItem variant="destructive">
-                <Trash />
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      <span className="text-muted-foreground">{note.description || "No description provided"}</span>
+      <AlertDialog>
+        <div className="flex items-center justify-between">
+          <h3 className="font-medium">{note.title}</h3>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon-sm">
+                <EllipsisVertical />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Note Option</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <Heading />
+                  Edit Title
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Edit />
+                  Edit Description
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild variant="destructive">
+                  <AlertDialogTrigger className="w-full">
+                    <Trash />
+                    Delete
+                  </AlertDialogTrigger>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+        <span className="text-muted-foreground">{note.description || "No description provided"}</span>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your account and remove your data from our
+              servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
