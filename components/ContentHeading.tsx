@@ -5,13 +5,12 @@ import { useState } from "react";
 import { createNote } from "@/lib/createNote";
 
 import { useClearEditor, useEditor } from "@/stores/editorStore";
-import { useAddNote, useClearCurrentNote, useCurrentNote, useUpdateNote } from "@/stores/notesStore";
+import { useAddNote, useClearOpenNote, useOpenNote, useUpdateNote } from "@/stores/notesStore";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { Pen, Save } from "lucide-react";
-import { isEmptyObject } from "@/lib/isEmptyObject";
 
 function ContentHeading() {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,8 +19,8 @@ function ContentHeading() {
   const addNote = useAddNote();
   const updateNote = useUpdateNote();
 
-  const currentNote = useCurrentNote();
-  const clearCurrentNote = useClearCurrentNote();
+  const openNote = useOpenNote();
+  const clearOpenNote = useClearOpenNote();
 
   const editor = useEditor();
   const clearEditor = useClearEditor();
@@ -34,9 +33,9 @@ function ContentHeading() {
     const content = editor?.getJSON();
     if (!content || !editor) return;
 
-    if (!isEmptyObject(currentNote.content)) {
-      updateNote({ id: currentNote.id, content });
-      clearCurrentNote();
+    if (openNote) {
+      updateNote({ id: openNote.id, content });
+      clearOpenNote();
     } else {
       const newNote = createNote({ content });
       addNote(newNote);
@@ -57,8 +56,8 @@ function ContentHeading() {
                   <Save />
                 </Button>
                 <Input
-                  value={currentNote.title}
-                  onChange={(e) => updateNote({ id: currentNote.id, title: e.target.value })}
+                  value={openNote?.title || "New Note"}
+                  onChange={(e) => openNote && updateNote({ id: openNote.id, title: e.target.value })}
                 />
               </>
             ) : (
@@ -66,7 +65,7 @@ function ContentHeading() {
                 <Button onClick={() => setIsEditing(true)} variant={"outline"} size="icon">
                   <Pen />
                 </Button>
-                <h1 className="text-xl">New Note</h1>
+                <h1 className="text-xl">{openNote?.title || "New Note"}</h1>
               </>
             )}
           </div>

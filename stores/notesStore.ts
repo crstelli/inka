@@ -3,32 +3,36 @@ import { immer } from "zustand/middleware/immer";
 
 import type { Note } from "@/lib/noteType";
 import type { JSONContent } from "@tiptap/react";
-import { createNote } from "@/lib/createNote";
 
-interface UpdateNoteParams {
-  id: number;
-
+interface UpdateOpenNoteParams {
   content?: JSONContent;
   title?: string;
 }
 
+interface UpdateNoteParams extends UpdateOpenNoteParams {
+  id: number;
+}
+
 interface NotesState {
   notes: Note[];
-  currentNote: Note;
+  openNote: number | undefined;
 
+  getNote: (id: number | undefined) => Note | undefined;
   addNote: (note: Note) => void;
   updateNote: ({ id, content, title }: UpdateNoteParams) => void;
 
-  setCurrentNote: (note: Note) => void;
-  clearCurrentNote: () => void;
+  setOpenNote: (id: number) => void;
+  clearOpenNote: () => void;
 }
 
 const useNotesStore = create(
-  immer<NotesState>((set) => ({
+  immer<NotesState>((set, get) => ({
     notes: [],
-    currentNote: createNote({ content: {} }),
+    openNote: undefined,
 
     // Notes state managment.
+    getNote: (id) => get().notes.find((n) => n.id === id),
+
     addNote: (note) =>
       set((state) => {
         state.notes.push(note);
@@ -37,21 +41,21 @@ const useNotesStore = create(
     updateNote: ({ id, content, title }) =>
       set((state) => {
         const editedNote = state.notes.find((n) => n.id === id);
-        console.log(editedNote);
+        if (!editedNote) return;
 
-        if (editedNote && content) editedNote.content = content;
-        if (editedNote && title) editedNote.title = title;
+        if (title) editedNote.title = title;
+        if (content) editedNote.content = content;
       }),
 
-    // Current note state managment.
-    setCurrentNote: (note) =>
+    // Open note state managment.
+    setOpenNote: (id) =>
       set((state) => {
-        state.currentNote = note;
+        state.openNote = id;
       }),
 
-    clearCurrentNote: () =>
+    clearOpenNote: () =>
       set((state) => {
-        state.currentNote = createNote({ content: {} });
+        state.openNote = undefined;
       }),
   }))
 );
@@ -60,6 +64,6 @@ export const useNotes = () => useNotesStore((state) => state.notes);
 export const useAddNote = () => useNotesStore((state) => state.addNote);
 export const useUpdateNote = () => useNotesStore((state) => state.updateNote);
 
-export const useCurrentNote = () => useNotesStore((state) => state.currentNote);
-export const useSetCurrentNote = () => useNotesStore((state) => state.setCurrentNote);
-export const useClearCurrentNote = () => useNotesStore((state) => state.clearCurrentNote);
+export const useOpenNote = () => useNotesStore((state) => state.getNote(state.openNote));
+export const useSetOpenNote = () => useNotesStore((state) => state.setOpenNote);
+export const useClearOpenNote = () => useNotesStore((state) => state.clearOpenNote);

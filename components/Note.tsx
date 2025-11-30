@@ -1,20 +1,20 @@
 "use client";
 
 import type { Note } from "@/lib/noteType";
-import { useCurrentNote, useSetCurrentNote } from "@/stores/notesStore";
+import { useOpenNote, useSetOpenNote } from "@/stores/notesStore";
 
 interface Props {
   note: Note;
 }
 
 function Note({ note }: Props) {
-  const currentNote = useCurrentNote();
-  const setCurrentNote = useSetCurrentNote();
+  const openNote = useOpenNote();
+  const setopenNote = useSetOpenNote();
 
-  const isActive = currentNote?.id === note.id;
+  const isActive = openNote?.id === note.id;
 
   function handleSetNote() {
-    setCurrentNote(note);
+    setopenNote(note.id);
   }
 
   return (

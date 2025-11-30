@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { useCurrentNote } from "@/stores/notesStore";
+import { useOpenNote } from "@/stores/notesStore";
 import { useClearEditor, useSetContent, useSetEditor } from "@/stores/editorStore";
 
 import { useEditor as useEditorApi, EditorContent } from "@tiptap/react";
@@ -12,7 +12,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { FloatingMenu } from "@/components/FloatingMenu";
 
 function Content() {
-  const currentNote = useCurrentNote();
+  const openNote = useOpenNote();
 
   const setEditor = useSetEditor();
   const clearEditor = useClearEditor();
@@ -41,9 +41,9 @@ function Content() {
 
   // Sync editor with current selected note.
   useEffect(() => {
-    if (currentNote) setContent(currentNote?.content);
+    if (openNote) setContent(openNote?.content);
     else clearEditor();
-  }, [clearEditor, currentNote, setContent]);
+  }, [clearEditor, openNote, setContent]);
 
   if (!editor) return null;
 
