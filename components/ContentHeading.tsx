@@ -8,14 +8,14 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 function ContentHeading() {
-  const [showSave, setShowSave] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
 
   const { currentNote, updateNote, clearCurrentNote, addNote } = useNotes();
   const { editor, clearEditor } = useEditor();
 
   if (!editor) return null;
 
-  editor.on("update", ({ editor }) => setShowSave(!!editor.state.doc.textContent.length));
+  editor.on("update", ({ editor }) => setIsEmpty(!editor.state.doc.textContent.length));
 
   function handleSave() {
     const content = editor?.getJSON();
@@ -34,8 +34,12 @@ function ContentHeading() {
 
   return (
     <div className="bg-secondary flex items-center justify-between px-12">
-      <h1 className="text-xl">New Note #1</h1>
-      {showSave && <Button onClick={handleSave}>Save</Button>}
+      {!isEmpty && (
+        <>
+          <h1 className="text-xl">New Note</h1>
+          <Button onClick={handleSave}>Save</Button>
+        </>
+      )}
     </div>
   );
 }
