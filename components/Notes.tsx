@@ -6,7 +6,7 @@ import { Note } from "@/components/Note";
 import { NotePlaceholder } from "@/components/NotePlaceholder";
 
 function Notes() {
-  const { notes } = useNotes();
+  const notes = useNotes();
 
   return (
     <div className="p-4 flex flex-col gap-4 overflow-auto">

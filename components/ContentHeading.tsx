@@ -5,7 +5,7 @@ import { useState } from "react";
 import { createNote } from "@/lib/createNote";
 
 import { useEditor } from "@/stores/editorStore";
-import { useNotes } from "@/stores/notesStore";
+import { useAddNote, useClearCurrentNote, useCurrentNote, useUpdateNote } from "@/stores/notesStore";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +17,12 @@ function ContentHeading() {
   const [isEditing, setIsEditing] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
 
-  const { currentNote, updateNote, clearCurrentNote, addNote } = useNotes();
+  const addNote = useAddNote();
+  const updateNote = useUpdateNote();
+
+  const currentNote = useCurrentNote();
+  const clearCurrentNote = useClearCurrentNote();
+
   const { editor, clearEditor } = useEditor();
 
   if (!editor) return null;
@@ -51,8 +56,8 @@ function ContentHeading() {
                   <Save />
                 </Button>
                 <Input
-                  defaultValue={currentNote?.title}
-                  onChange={(e) => updateNote({ id: currentNote?.id, title: e.target.value })}
+                  value={currentNote.title}
+                  onChange={(e) => updateNote({ id: currentNote.id, title: e.target.value })}
                 />
               </>
             ) : (

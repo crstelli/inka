@@ -23,7 +23,7 @@ interface NotesState {
   clearCurrentNote: () => void;
 }
 
-export const useNotes = create(
+const useNotesStore = create(
   immer<NotesState>((set) => ({
     notes: [],
     currentNote: createNote({ content: {} }),
@@ -37,6 +37,7 @@ export const useNotes = create(
     updateNote: ({ id, content, title }) =>
       set((state) => {
         const editedNote = state.notes.find((n) => n.id === id);
+        console.log(editedNote);
 
         if (editedNote && content) editedNote.content = content;
         if (editedNote && title) editedNote.title = title;
@@ -54,3 +55,11 @@ export const useNotes = create(
       }),
   }))
 );
+
+export const useNotes = () => useNotesStore((state) => state.notes);
+export const useAddNote = () => useNotesStore((state) => state.addNote);
+export const useUpdateNote = () => useNotesStore((state) => state.updateNote);
+
+export const useCurrentNote = () => useNotesStore((state) => state.currentNote);
+export const useSetCurrentNote = () => useNotesStore((state) => state.setCurrentNote);
+export const useClearCurrentNote = () => useNotesStore((state) => state.clearCurrentNote);
