@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { Pen, Save } from "lucide-react";
+import { DEFAULT_NOTE_NAME } from "@/lib/variables";
 
 function ContentHeading() {
   const [isEditing, setIsEditing] = useState(false);
@@ -52,20 +53,20 @@ function ContentHeading() {
           <div className="flex items-center gap-4">
             {isEditing ? (
               <>
-                <Button onClick={() => setIsEditing(false)} variant={"outline"} size="icon">
+                <Button onClick={() => setIsEditing(false)} variant="outline" size="icon">
                   <Save />
                 </Button>
                 <Input
-                  value={openNote?.title || "New Note"}
+                  value={openNote?.title || DEFAULT_NOTE_NAME}
                   onChange={(e) => openNote && updateNote({ id: openNote.id, title: e.target.value })}
                 />
               </>
             ) : (
               <>
-                <Button onClick={() => setIsEditing(true)} variant={"outline"} size="icon">
+                <Button onClick={() => setIsEditing(true)} variant="outline" size="icon">
                   <Pen />
                 </Button>
-                <h1 className="text-xl">{openNote?.title || "New Note"}</h1>
+                <h1 className="text-xl">{openNote?.title || DEFAULT_NOTE_NAME}</h1>
               </>
             )}
           </div>
