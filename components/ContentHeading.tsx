@@ -1,13 +1,17 @@
 "use client";
 
+import { useState } from "react";
+
 import { createNote } from "@/lib/createNote";
+
 import { useEditor } from "@/stores/editorStore";
 import { useNotes } from "@/stores/notesStore";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { Pen, Save } from "lucide-react";
 import { Input } from "@/components/ui/input";
+
+import { Pen, Save } from "lucide-react";
+import { isEmptyObject } from "@/lib/isEmptyObject";
 
 function ContentHeading() {
   const [isEditing, setIsEditing] = useState(false);
@@ -24,7 +28,7 @@ function ContentHeading() {
     const content = editor?.getJSON();
     if (!content || !editor) return;
 
-    if (currentNote) {
+    if (!isEmptyObject(currentNote.content)) {
       updateNote({ id: currentNote.id, content });
       clearCurrentNote();
     } else {
@@ -33,6 +37,7 @@ function ContentHeading() {
     }
 
     clearEditor();
+    setIsEditing(false);
   }
 
   return (
@@ -45,7 +50,10 @@ function ContentHeading() {
                 <Button onClick={() => setIsEditing(false)} variant={"outline"} size="icon">
                   <Save />
                 </Button>
-                <Input />
+                <Input
+                  defaultValue={currentNote?.title}
+                  onChange={(e) => updateNote({ id: currentNote?.id, title: e.target.value })}
+                />
               </>
             ) : (
               <>

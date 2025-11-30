@@ -3,6 +3,7 @@ import { immer } from "zustand/middleware/immer";
 
 import type { Note } from "@/lib/noteType";
 import type { JSONContent } from "@tiptap/react";
+import { createNote } from "@/lib/createNote";
 
 interface UpdateNoteParams {
   id: number;
@@ -13,7 +14,7 @@ interface UpdateNoteParams {
 
 interface NotesState {
   notes: Note[];
-  currentNote: Note | undefined;
+  currentNote: Note;
 
   addNote: (note: Note) => void;
   updateNote: ({ id, content, title }: UpdateNoteParams) => void;
@@ -25,7 +26,7 @@ interface NotesState {
 export const useNotes = create(
   immer<NotesState>((set) => ({
     notes: [],
-    currentNote: undefined,
+    currentNote: createNote({ content: {} }),
 
     // Notes state managment.
     addNote: (note) =>
@@ -49,7 +50,7 @@ export const useNotes = create(
 
     clearCurrentNote: () =>
       set((state) => {
-        state.currentNote = undefined;
+        state.currentNote = createNote({ content: {} });
       }),
   }))
 );
