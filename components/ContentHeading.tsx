@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { createNote } from "@/lib/createNote";
 
-import { useEditor } from "@/stores/editorStore";
+import { useClearEditor, useEditor } from "@/stores/editorStore";
 import { useAddNote, useClearCurrentNote, useCurrentNote, useUpdateNote } from "@/stores/notesStore";
 
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,8 @@ function ContentHeading() {
   const currentNote = useCurrentNote();
   const clearCurrentNote = useClearCurrentNote();
 
-  const { editor, clearEditor } = useEditor();
+  const editor = useEditor();
+  const clearEditor = useClearEditor();
 
   if (!editor) return null;
 

@@ -9,7 +9,7 @@ interface EditorState {
   setContent: (content: JSONContent) => void;
 }
 
-export const useEditor = create<EditorState>((set) => ({
+const useEditorStore = create<EditorState>((set) => ({
   editor: undefined,
 
   setEditor: (editor) => set(() => ({ editor })),
@@ -25,3 +25,9 @@ export const useEditor = create<EditorState>((set) => ({
       return state;
     }),
 }));
+
+export const useEditor = () => useEditorStore((state) => state.editor);
+
+export const useSetEditor = () => useEditorStore((state) => state.setEditor);
+export const useClearEditor = () => useEditorStore((state) => state.clearEditor);
+export const useSetContent = () => useEditorStore((state) => state.setContent);

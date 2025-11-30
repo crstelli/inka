@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-import { useNotes } from "@/stores/notesStore";
-import { useEditor } from "@/stores/editorStore";
+import { useCurrentNote } from "@/stores/notesStore";
+import { useClearEditor, useSetContent, useSetEditor } from "@/stores/editorStore";
 
 import { useEditor as useEditorApi, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
@@ -12,8 +12,11 @@ import StarterKit from "@tiptap/starter-kit";
 import { FloatingMenu } from "@/components/FloatingMenu";
 
 function Content() {
-  const { currentNote } = useNotes();
-  const { setEditor, clearEditor, setContent } = useEditor();
+  const currentNote = useCurrentNote();
+
+  const setEditor = useSetEditor();
+  const clearEditor = useClearEditor();
+  const setContent = useSetContent();
 
   const editor = useEditorApi({
     extensions: [
