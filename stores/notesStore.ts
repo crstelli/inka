@@ -19,6 +19,8 @@ interface NotesState {
   openNote: number | undefined;
 
   getNote: (id: number | undefined) => Note | undefined;
+
+  loadNotes: () => void;
   addNote: (note: Note) => void;
   deleteNote: (id: number) => void;
   updateNote: ({ id, content, title, description }: UpdateNoteParams) => void;
@@ -34,6 +36,16 @@ const useNotesStore = create(
 
     // Notes state managment.
     getNote: (id) => get().notes.find((n) => n.id === id),
+
+    loadNotes: () => {
+      const raw = localStorage.getItem("notes");
+      if (!raw) return;
+
+      try {
+        const data = JSON.parse(raw);
+        set({ notes: data });
+      } catch {}
+    },
 
     addNote: (note) =>
       set((state) => {
@@ -69,6 +81,8 @@ const useNotesStore = create(
 );
 
 export const useNotes = () => useNotesStore((state) => state.notes);
+
+export const useLoadNotes = () => useNotesStore((state) => state.loadNotes);
 export const useAddNote = () => useNotesStore((state) => state.addNote);
 export const useDeleteNote = () => useNotesStore((state) => state.deleteNote);
 export const useUpdateNote = () => useNotesStore((state) => state.updateNote);
