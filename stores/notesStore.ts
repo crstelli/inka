@@ -3,6 +3,7 @@ import { immer } from "zustand/middleware/immer";
 
 import type { Note } from "@/lib/noteType";
 import type { JSONContent } from "@tiptap/react";
+import { debounce } from "@/lib/debounce";
 
 interface UpdateOpenNoteParams {
   content?: JSONContent;
@@ -30,54 +31,65 @@ interface NotesState {
 }
 
 const useNotesStore = create(
-  immer<NotesState>((set, get) => ({
-    notes: [],
-    openNote: undefined,
+  immer<NotesState>((set, get) => {
+    const saveStateDebounced = debounce(() => {
+      const state = get().notes;
+      localStorage.setItem("notes", JSON.stringify(state));
+    }, 500);
 
-    // Notes state managment.
-    getNote: (id) => get().notes.find((n) => n.id === id),
+    return {
+      notes: [],
+      openNote: undefined,
 
-    loadNotes: () => {
-      const raw = localStorage.getItem("notes");
-      if (!raw) return;
+      // Notes state managment.
+      getNote: (id) => get().notes.find((n) => n.id === id),
 
-      try {
-        const data = JSON.parse(raw);
-        set({ notes: data });
-      } catch {}
-    },
+      loadNotes: () => {
+        const raw = localStorage.getItem("notes");
+        if (!raw) return;
 
-    addNote: (note) =>
-      set((state) => {
-        state.notes.push(note);
-      }),
+        try {
+          const data = JSON.parse(raw);
+          set({ notes: data });
+        } catch {}
+      },
 
-    deleteNote: (id) =>
-      set((state) => {
-        state.notes = state.notes.filter((n) => n.id !== id);
-      }),
+      addNote: (note) =>
+        set((state) => {
+          state.notes.push(note);
+          saveStateDebounced();
+        }),
 
-    updateNote: ({ id, content, title, description }) =>
-      set((state) => {
-        const editedNote = state.notes.find((n) => n.id === id);
-        if (!editedNote) return;
+      deleteNote: (id) =>
+        set((state) => {
+          state.notes = state.notes.filter((n) => n.id !== id);
+          saveStateDebounced();
+        }),
 
-        if (content) editedNote.content = content;
-        if (title) editedNote.title = title;
-        if (description) editedNote.description = description;
-      }),
+      updateNote: ({ id, content, title, description }) =>
+        set((state) => {
+          const editedNote = state.notes.find((n) => n.id === id);
+          if (!editedNote) return;
 
-    // Open note state managment.
-    setOpenNote: (id) =>
-      set((state) => {
-        state.openNote = id;
-      }),
+          if (content) editedNote.content = content;
+          if (title) editedNote.title = title;
+          if (description) editedNote.description = description;
 
-    clearOpenNote: () =>
-      set((state) => {
-        state.openNote = undefined;
-      }),
-  }))
+          saveStateDebounced();
+        }),
+
+      // Open note state managment.
+      setOpenNote: (id) =>
+        set((state) => {
+          state.openNote = id;
+        }),
+
+      clearOpenNote: () =>
+        set((state) => {
+          state.openNote = undefined;
+        }),
+    };
+  })
 );
 
 export const useNotes = () => useNotesStore((state) => state.notes);
