@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { createNote } from "@/lib/createNote";
 
@@ -27,9 +27,18 @@ function ContentHeading() {
   const editor = useEditor();
   const clearEditor = useClearEditor();
 
-  if (!editor) return null;
+  useEffect(() => {
+    if (!editor) return;
 
-  editor.on("update", ({ editor }) => setIsEmpty(!editor.state.doc.textContent.length));
+    const cb = () => setIsEmpty(!editor.state.doc.textContent.length);
+    editor.on("update", cb);
+
+    return () => {
+      editor.off("update", cb);
+    };
+  }, [editor]);
+
+  if (!editor) return null;
 
   function handleSave() {
     const content = editor?.getJSON();
