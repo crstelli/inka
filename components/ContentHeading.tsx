@@ -14,6 +14,7 @@ import { Pen, Save } from "lucide-react";
 import { DEFAULT_NOTE_NAME } from "@/lib/variables";
 
 function ContentHeading() {
+  const [title, setTitle] = useState(DEFAULT_NOTE_NAME);
   const [isEditing, setIsEditing] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
 
@@ -38,12 +39,18 @@ function ContentHeading() {
       updateNote({ id: openNote.id, content });
       clearOpenNote();
     } else {
-      const newNote = createNote({ content });
+      const newNote = createNote({ content, title });
       addNote(newNote);
     }
 
     clearEditor();
     setIsEditing(false);
+    setTitle(DEFAULT_NOTE_NAME);
+  }
+
+  function handleTitleEdit(value: string) {
+    if (openNote) updateNote({ id: openNote.id, title: value });
+    setTitle(value);
   }
 
   return (
@@ -56,17 +63,14 @@ function ContentHeading() {
                 <Button onClick={() => setIsEditing(false)} variant="outline" size="icon">
                   <Save />
                 </Button>
-                <Input
-                  value={openNote?.title || DEFAULT_NOTE_NAME}
-                  onChange={(e) => openNote && updateNote({ id: openNote.id, title: e.target.value })}
-                />
+                <Input value={openNote?.title || title} onChange={(e) => handleTitleEdit(e.target.value)} />
               </>
             ) : (
               <>
                 <Button onClick={() => setIsEditing(true)} variant="outline" size="icon">
                   <Pen />
                 </Button>
-                <h1 className="text-xl">{openNote?.title || DEFAULT_NOTE_NAME}</h1>
+                <h1 className="text-xl">{openNote?.title || title}</h1>
               </>
             )}
           </div>
