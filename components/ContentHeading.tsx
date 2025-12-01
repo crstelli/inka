@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { createNote } from "@/lib/createNote";
 
 import { useClearEditor, useEditor } from "@/stores/editorStore";
-import { useAddNote, useClearOpenNote, useOpenNote, useUpdateNote } from "@/stores/notesStore";
+import { useAddNote, useOpenNote, useUpdateNote } from "@/stores/notesStore";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
