@@ -2,7 +2,7 @@ import { Breadcrumb as BreadcrumbComp, BreadcrumbItem, BreadcrumbList, Breadcrum
 
 function Breadcrumb() {
   return (
-    <BreadcrumbComp className="col-span-2 flex items-center px-4">
+    <BreadcrumbComp className="flex items-center px-4">
       <BreadcrumbList>
         <BreadcrumbItem>Home</BreadcrumbItem>
         <BreadcrumbSeparator />

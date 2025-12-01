@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={`dark ${geist.className}`}>
-      <body className="grid grid-cols-[2fr_3fr_10fr] divide-solid divide-x divide-y grid-rows-[50px_50px_1fr_50px] w-screen h-screen bg-background text-foreground">
+      <body className="w-screen h-screen bg-background text-foreground grid grid-cols-[1.5fr_10fr] grid-rows-1 divide-x divide-border">
         <Sidebar />
         {children}
       </body>

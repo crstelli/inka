@@ -9,13 +9,16 @@ import Link from "next/link";
 
 function Sidebar() {
   return (
-    <div className="bg-secondary h-full flex flex-col row-span-3 px-4 py-10 gap-2">
-      <Item icon={StickyNote} altPath="/">
-        Notes
-      </Item>
-      <Item icon={Tag}>Tags</Item>
-      <Item icon={Trash}>Trash</Item>
-      <Item icon={Settings}>Settings</Item>
+    <div className="grid grid-rows-[50px_1fr] divide-y divide-border">
+      <div></div>
+      <div className="bg-secondary h-full flex flex-col row-span-3 px-4 py-10 gap-2">
+        <Item icon={StickyNote} altPath="/">
+          Notes
+        </Item>
+        <Item icon={Tag}>Tags</Item>
+        <Item icon={Trash}>Trash</Item>
+        <Item icon={Settings}>Settings</Item>
+      </div>
     </div>
   );
 }

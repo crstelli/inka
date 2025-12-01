@@ -19,7 +19,7 @@ export default function Page() {
   }, [loadNotes]);
 
   return (
-    <>
+    <div className="grid grid-cols-[3fr_10fr] divide-solid divide-x divide-y grid-rows-[50px_50px_1fr_50px]">
       <AddNote />
       <NoteHeading />
       <Search />
@@ -27,6 +27,6 @@ export default function Page() {
       <Notes />
       <Content />
       <Breadcrumb />
-    </>
+    </div>
   );
 }
