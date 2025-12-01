@@ -6,6 +6,7 @@ import { useEditorState } from "@tiptap/react";
 
 import { Button } from "./ui/button";
 import { ButtonGroup } from "./ui/button-group";
+import { List } from "lucide-react";
 
 interface Props {
   editor: Editor;
@@ -26,6 +27,8 @@ function FloatingMenu({ editor }: Props) {
         isBold: editor.isActive("bold"),
         isItalic: editor.isActive("italic"),
         isStrike: editor.isActive("strike"),
+
+        isUnorderedList: editor.isActive("bulletList"),
       };
     },
   });
@@ -80,6 +83,16 @@ function FloatingMenu({ editor }: Props) {
             aria-label="Heading"
           >
             S
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button
+            variant={editorState?.isUnorderedList ? "default" : "secondary"}
+            className="line-through border"
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            aria-label="Bullet List"
+          >
+            <List />
           </Button>
         </ButtonGroup>
       </ButtonGroup>
