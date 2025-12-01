@@ -7,6 +7,7 @@ import type { JSONContent } from "@tiptap/react";
 interface UpdateOpenNoteParams {
   content?: JSONContent;
   title?: string;
+  description?: string;
 }
 
 interface UpdateNoteParams extends UpdateOpenNoteParams {
@@ -20,7 +21,7 @@ interface NotesState {
   getNote: (id: number | undefined) => Note | undefined;
   addNote: (note: Note) => void;
   deleteNote: (id: number) => void;
-  updateNote: ({ id, content, title }: UpdateNoteParams) => void;
+  updateNote: ({ id, content, title, description }: UpdateNoteParams) => void;
 
   setOpenNote: (id: number) => void;
   clearOpenNote: () => void;
@@ -44,13 +45,14 @@ const useNotesStore = create(
         state.notes = state.notes.filter((n) => n.id !== id);
       }),
 
-    updateNote: ({ id, content, title }) =>
+    updateNote: ({ id, content, title, description }) =>
       set((state) => {
         const editedNote = state.notes.find((n) => n.id === id);
         if (!editedNote) return;
 
-        if (title) editedNote.title = title;
         if (content) editedNote.content = content;
+        if (title) editedNote.title = title;
+        if (description) editedNote.description = description;
       }),
 
     // Open note state managment.
