@@ -22,7 +22,6 @@ function ContentHeading() {
   const updateNote = useUpdateNote();
 
   const openNote = useOpenNote();
-  const clearOpenNote = useClearOpenNote();
 
   const editor = useEditor();
   const clearEditor = useClearEditor();
@@ -46,7 +45,6 @@ function ContentHeading() {
 
     if (openNote) {
       updateNote({ id: openNote.id, content });
-      clearOpenNote();
     } else {
       const newNote = createNote({ content, title });
       addNote(newNote);
