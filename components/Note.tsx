@@ -34,7 +34,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { Note } from "@/lib/noteType";
-import { useDeleteNote, useOpenNote, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
+import { useClearOpenNote, useDeleteNote, useOpenNote, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 
 interface Props {
@@ -52,11 +52,13 @@ function Note({ note }: Props) {
 
   const openNote = useOpenNote();
   const setOpenNote = useSetOpenNote();
+  const clearOpenNote = useClearOpenNote();
 
   const isActive = openNote?.id === note.id;
 
   function handleDeleteNote() {
     deleteNote(note.id);
+    clearOpenNote();
   }
 
   function handleOpenNote() {
