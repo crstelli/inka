@@ -28,7 +28,6 @@ function ContentHeading() {
   const editor = useEditor();
 
   const handleSave = useCallback(() => {
-    console.log("save");
     const content = editor?.getJSON();
     if (!content || !editor) return;
 
