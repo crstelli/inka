@@ -11,6 +11,7 @@ interface SearchState {
 
   pageNext: () => void;
   pagePrev: () => void;
+  pageReset: () => void;
 }
 
 const useSearchStore = create<SearchState>((set) => ({
@@ -24,6 +25,7 @@ const useSearchStore = create<SearchState>((set) => ({
 
   pageNext: () => set((state) => ({ page: state.page + 1 })),
   pagePrev: () => set((state) => ({ page: state.page - 1 })),
+  pageReset: () => set((state) => ({ page: state.minPage })),
 }));
 
 export const useSearch = () => useSearchStore((state) => state.search);
@@ -32,6 +34,7 @@ export const useSetSearch = () => useSearchStore((state) => state.setSearch);
 export const usePage = () => useSearchStore((state) => state.page);
 export const useMinPage = () => useSearchStore((state) => state.minPage);
 export const useMaxPage = () => useSearchStore((state) => state.maxPage);
+export const useResetPage = () => useSearchStore((state) => state.pageReset);
 
 export const usePageNext = () => useSearchStore((state) => state.pageNext);
 export const usePagePrev = () => useSearchStore((state) => state.pagePrev);
