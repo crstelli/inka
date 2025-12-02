@@ -1,17 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { createNote } from "@/lib/createNote";
 
-import { useClearEditor, useEditor } from "@/stores/editorStore";
-import { useAddNote, useOpenNote, useUpdateNote } from "@/stores/notesStore";
+import { useEditor } from "@/stores/editorStore";
+import { useAddNote, useOpenNote, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { Pen, Save } from "lucide-react";
 import { DEFAULT_NOTE_NAME } from "@/lib/variables";
+import { debounce } from "@/lib/debounce";
 
 function ContentHeading() {
   const [title, setTitle] = useState(DEFAULT_NOTE_NAME);
@@ -22,24 +23,12 @@ function ContentHeading() {
   const updateNote = useUpdateNote();
 
   const openNote = useOpenNote();
+  const setOpenNote = useSetOpenNote();
 
   const editor = useEditor();
-  const clearEditor = useClearEditor();
 
-  useEffect(() => {
-    if (!editor) return;
-
-    const cb = () => setIsEmpty(!editor.state.doc.textContent.length);
-    editor.on("update", cb);
-
-    return () => {
-      editor.off("update", cb);
-    };
-  }, [editor]);
-
-  if (!editor) return null;
-
-  function handleSave() {
+  const handleSave = useCallback(() => {
+    console.log("save");
     const content = editor?.getJSON();
     if (!content || !editor) return;
 
@@ -48,17 +37,32 @@ function ContentHeading() {
     } else {
       const newNote = createNote({ content, title });
       addNote(newNote);
+      setOpenNote(newNote.id);
     }
+  }, [addNote, editor, openNote, setOpenNote, title, updateNote]);
 
-    clearEditor();
-    setIsEditing(false);
-    setTitle(DEFAULT_NOTE_NAME);
-  }
+  const debounceSave = debounce(handleSave, 500);
 
   function handleTitleEdit(value: string) {
     if (openNote) updateNote({ id: openNote.id, title: value });
     setTitle(value);
   }
+
+  useEffect(() => {
+    if (!editor) return;
+
+    const cb = () => {
+      setIsEmpty(!editor.state.doc.textContent.length);
+      debounceSave();
+    };
+    editor.on("update", cb);
+
+    return () => {
+      editor.off("update", cb);
+    };
+  }, [debounceSave, editor]);
+
+  if (!editor) return null;
 
   return (
     <div className="bg-secondary flex items-center justify-between px-12">
