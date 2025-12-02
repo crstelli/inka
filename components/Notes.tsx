@@ -10,8 +10,6 @@ function Notes() {
   const notes = useNotes();
   const search = useSearch();
 
-  console.log(notes);
-
   if (notes.length === 0) return <NotePlaceholder />;
 
   let filteredNotes = notes;
