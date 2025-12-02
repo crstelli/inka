@@ -22,6 +22,7 @@ const useEditorStore = create<EditorState>((set) => ({
   setContent: (content) =>
     set((state) => {
       state.editor?.commands.setContent(content);
+
       return state;
     }),
 }));

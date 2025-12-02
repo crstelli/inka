@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-import { useOpenNote } from "@/stores/notesStore";
+import { useOpenNote, useOpenNoteContent, useOpenNoteId } from "@/stores/notesStore";
 import { useClearEditor, useSetContent, useSetEditor } from "@/stores/editorStore";
 
 import { useEditor as useEditorApi, EditorContent } from "@tiptap/react";
@@ -13,10 +13,14 @@ import { FloatingMenu } from "@/components/FloatingMenu";
 
 function Content() {
   const openNote = useOpenNote();
+  const openNoteId = useOpenNoteId();
+  const openNoteContent = useOpenNoteContent();
 
   const setEditor = useSetEditor();
   const clearEditor = useClearEditor();
   const setContent = useSetContent();
+
+  const contentRef = useRef(openNoteContent);
 
   const editor = useEditorApi({
     extensions: [
@@ -39,11 +43,15 @@ function Content() {
     if (editor) setEditor(editor);
   }, [editor, setEditor]);
 
+  useEffect(() => {
+    contentRef.current = openNoteContent;
+  }, [openNoteContent]);
+
   // Sync editor with current selected note.
   useEffect(() => {
-    if (openNote) setContent(openNote?.content);
+    if (openNoteId && contentRef.current) setContent(contentRef.current);
     else clearEditor();
-  }, [clearEditor, openNote, setContent]);
+  }, [clearEditor, openNoteId, setContent]);
 
   if (!editor) return null;
 
