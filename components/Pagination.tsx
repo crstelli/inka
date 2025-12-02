@@ -1,7 +1,6 @@
 import {
   Pagination as PaginationComp,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -24,25 +23,19 @@ function Pagination() {
     <PaginationComp>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious onClick={() => canUndo && prevPage()} href="#" />
+          <PaginationPrevious onClick={() => canUndo && prevPage()} />
         </PaginationItem>
         <PaginationItem className={!canUndo ? "opacity-0 pointer-events-none" : ""}>
-          <PaginationLink onClick={prevPage} href="#">
-            {page - 1}
-          </PaginationLink>
+          <PaginationLink onClick={prevPage}>{page - 1}</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#" isActive>
-            {page}
-          </PaginationLink>
+          <PaginationLink isActive>{page}</PaginationLink>
         </PaginationItem>
         <PaginationItem className={!canNext ? "opacity-0 pointer-events-none" : ""}>
-          <PaginationLink onClick={nextPage} href="#">
-            {page + 1}
-          </PaginationLink>
+          <PaginationLink onClick={nextPage}>{page + 1}</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext onClick={() => canNext && nextPage()} href="#" />
+          <PaginationNext onClick={() => canNext && nextPage()} />
         </PaginationItem>
       </PaginationContent>
     </PaginationComp>

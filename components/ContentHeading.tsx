@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { Pen, Save } from "lucide-react";
-import { DEFAULT_NOTE_NAME } from "@/lib/variables";
+import { DEFAULT_NOTE_NAME } from "@/lib/constants";
 import { debounce } from "@/lib/debounce";
 
 function ContentHeading() {
