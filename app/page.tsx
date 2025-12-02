@@ -10,6 +10,7 @@ import { ContentHeading } from "@/components/ContentHeading";
 import { NoteHeading } from "@/components/NoteHeading";
 import { Notes } from "@/components/Notes";
 import { Search } from "@/components/Search";
+import { Pagination } from "@/components/Pagination";
 
 export default function Page() {
   const loadNotes = useLoadNotes();
@@ -26,6 +27,7 @@ export default function Page() {
       <ContentHeading />
       <Notes />
       <Content />
+      <Pagination />
       <Breadcrumb />
     </div>
   );
