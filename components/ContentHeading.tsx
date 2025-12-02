@@ -37,6 +37,8 @@ function ContentHeading() {
       const newNote = createNote({ content, title });
       addNote(newNote);
       setOpenNote(newNote.id);
+
+      setTitle(DEFAULT_NOTE_NAME);
     }
   }, [addNote, editor, openNote, setOpenNote, title, updateNote]);
 
