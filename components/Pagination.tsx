@@ -7,30 +7,42 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useMaxPage, useMinPage, usePage, usePageNext, usePagePrev } from "@/stores/searchStore";
 
 function Pagination() {
+  const page = usePage();
+  const minPage = useMinPage();
+  const maxPage = useMaxPage();
+
+  const nextPage = usePageNext();
+  const prevPage = usePagePrev();
+
+  const canUndo = page > minPage;
+  const canNext = page < maxPage;
+
   return (
     <PaginationComp>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious onClick={() => canUndo && prevPage()} href="#" />
         </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
+        <PaginationItem className={!canUndo ? "opacity-0 pointer-events-none" : ""}>
+          <PaginationLink onClick={prevPage} href="#">
+            {page - 1}
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
+          <PaginationLink href="#" isActive>
+            {page}
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem className={!canNext ? "opacity-0 pointer-events-none" : ""}>
+          <PaginationLink onClick={nextPage} href="#">
+            {page + 1}
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext onClick={() => canNext && nextPage()} href="#" />
         </PaginationItem>
       </PaginationContent>
     </PaginationComp>
