@@ -1,7 +1,7 @@
 "use client";
 
 import { useNotes } from "@/stores/notesStore";
-import { usePage, useSearch } from "@/stores/searchStore";
+import { usePage, useSearch, useSetMaxPage } from "@/stores/searchStore";
 
 import { Note } from "@/components/Note";
 import { NotePlaceholder } from "@/components/NotePlaceholder";
@@ -12,6 +12,7 @@ function Notes() {
   const search = useSearch();
 
   const page = usePage();
+  const setMaxPage = useSetMaxPage();
 
   let filteredNotes = notes;
 
@@ -22,6 +23,8 @@ function Notes() {
     NOTES_PAGE_SIZE * (page - 1),
     NOTES_PAGE_SIZE + NOTES_PAGE_SIZE * (page - 1)
   );
+
+  setMaxPage(Math.ceil(filteredNotes.length / NOTES_PAGE_SIZE));
 
   return (
     <div className="p-4 flex flex-col gap-4 overflow-auto">
