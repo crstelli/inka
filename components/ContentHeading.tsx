@@ -69,14 +69,14 @@ function ContentHeading() {
         <div className="flex items-center gap-4">
           {isEditing ? (
             <>
-              <Button onClick={() => setIsEditing(false)} variant="outline" size="icon">
+              <Button onClick={() => setIsEditing(false)} variant="ghost" size="icon">
                 <Save />
               </Button>
               <Input value={openNote?.title || title} onChange={(e) => handleTitleEdit(e.target.value)} />
             </>
           ) : (
             <>
-              <Button onClick={() => setIsEditing(true)} variant="outline" size="icon">
+              <Button onClick={() => setIsEditing(true)} variant="ghost" size="icon">
                 <Pen />
               </Button>
               <h1 className="text-xl">{openNote?.title || title}</h1>

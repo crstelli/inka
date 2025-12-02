@@ -80,7 +80,7 @@ function Note({ note }: Props) {
             <h3 className="font-medium">{note.title}</h3>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon-sm">
+                <Button variant="ghost" size="icon-sm">
                   <EllipsisVertical />
                 </Button>
               </DropdownMenuTrigger>
