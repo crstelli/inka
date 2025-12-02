@@ -21,7 +21,7 @@ const useSearchStore = create<SearchState>((set) => ({
 
   page: 1,
   minPage: 1,
-  maxPage: 1, // Placeholder
+  maxPage: 1,
 
   setSearch: (query) => set(() => ({ search: query })),
 

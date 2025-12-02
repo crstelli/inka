@@ -8,8 +8,8 @@ interface StoreType {
 
 const useMenusStore = create<StoreType>((set) => ({
   globalSidebar: true,
-  openGlobalSidebar: () => () => ({ globalSidebar: true }),
-  closeGlobalSidebar: () => () => ({ globalSidebar: false }),
+  openGlobalSidebar: () => set({ globalSidebar: true }),
+  closeGlobalSidebar: () => set({ globalSidebar: false }),
 }));
 
 export const useGlobalSidebar = () => useMenusStore((state) => state.globalSidebar);
