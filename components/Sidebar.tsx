@@ -6,9 +6,10 @@ import { Settings, StickyNote, Tag, Trash } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { useGlobalSidebar } from "@/stores/menusStore";
 
 function Sidebar() {
-  const isOpen = false;
+  const isOpen = useGlobalSidebar();
 
   return (
     <div className={`grid grid-rows-[50px_1fr] divide-y divide-border" ${isOpen ? "w-60" : null}`}>
