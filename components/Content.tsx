@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import { useOpenNote, useOpenNoteContent, useOpenNoteId } from "@/stores/notesStore";
+import { useOpenNoteContent, useOpenNoteId } from "@/stores/notesStore";
 import { useClearEditor, useSetContent, useSetEditor } from "@/stores/editorStore";
 
 import { useEditor as useEditorApi, EditorContent } from "@tiptap/react";
@@ -12,7 +12,6 @@ import StarterKit from "@tiptap/starter-kit";
 import { FloatingMenu } from "@/components/FloatingMenu";
 
 function Content() {
-  const openNote = useOpenNote();
   const openNoteId = useOpenNoteId();
   const openNoteContent = useOpenNoteContent();
 
