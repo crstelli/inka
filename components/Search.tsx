@@ -9,11 +9,11 @@ import { SearchIcon } from "lucide-react";
 function Search() {
   const search = useSearch();
 
-  const setSerach = useSetSearch();
+  const setSearch = useSetSearch();
   const resetPage = useResetPage();
 
   function handleSearch(e: ChangeEvent<HTMLInputElement>) {
-    setSerach(e.target.value);
+    setSearch(e.target.value);
     resetPage();
   }
 
