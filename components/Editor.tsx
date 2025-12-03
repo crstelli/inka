@@ -1,34 +1,40 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-import {
-  useAddNote,
-  useOpenNote,
-  useOpenNoteContent,
-  useOpenNoteId,
-  useSetOpenNote,
-  useUpdateNote,
-} from "@/stores/notesStore";
+import { useAddNote, useOpenNote, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
+import { debounce } from "@/lib/debounce";
+import { createNote } from "@/lib/createNote";
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
 import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "@/components/FloatingMenu";
-import { debounce } from "@/lib/debounce";
-import { createNote } from "@/lib/createNote";
 
 function Editor() {
-  const title = "a";
-  const updateNote = useUpdateNote();
   const addNote = useAddNote();
+  const updateNote = useUpdateNote();
   const setOpenNote = useSetOpenNote();
-  const openNote = useOpenNote();
-  const openNoteId = useOpenNoteId();
-  const openNoteContent = useOpenNoteContent();
 
-  const contentRef = useRef(openNoteContent);
+  const openNote = useOpenNote();
+
+  const noteId = openNote?.id;
+  const noteContent = openNote?.content;
+
+  const debounceSave = debounce(function () {
+    if (!editor) return;
+    const content = editor.getJSON();
+
+    if (openNote) {
+      updateNote({ id: openNote.id, content });
+    } else {
+      const newNote = createNote({ content });
+
+      addNote(newNote);
+      setOpenNote(newNote.id);
+    }
+  }, 500);
 
   const editor = useEditor({
     extensions: [
@@ -43,44 +49,19 @@ function Editor() {
       },
     },
 
+    onUpdate: debounceSave,
+
     immediatelyRender: false,
   });
-
-  const handleSave = useCallback(() => {
-    const content = editor?.getJSON();
-    if (!content || !editor) return;
-
-    if (openNote) {
-      updateNote({ id: openNote.id, content });
-    } else {
-      const newNote = createNote({ content, title });
-      addNote(newNote);
-      setOpenNote(newNote.id);
-    }
-  }, [addNote, editor, openNote, setOpenNote, title, updateNote]);
-
-  const debounceSave = debounce(handleSave, 500);
-
-  useEffect(() => {
-    if (!editor) return;
-
-    const cb = () => {
-      debounceSave();
-    };
-    editor.on("update", cb);
-
-    return () => {
-      editor.off("update", cb);
-    };
-  }, [debounceSave, editor]);
 
   // Sync editor with current selected note.
   useEffect(() => {
     if (!editor) return;
 
-    if (openNoteId && contentRef.current) editor.commands.setContent(contentRef.current);
-    else editor.commands.clearContent();
-  }, [openNoteId, editor]);
+    if (noteId && noteContent) editor.commands.setContent(noteContent, { emitUpdate: false });
+    else editor.commands.clearContent(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [noteId, editor]); // Disabled ESLint rule to avoid editor setContent on every update.
 
   if (!editor) return null;
 

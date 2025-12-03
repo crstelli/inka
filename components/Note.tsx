@@ -57,8 +57,8 @@ function Note({ note }: Props) {
   const isActive = openNote?.id === note.id;
 
   function handleDeleteNote() {
-    deleteNote(note.id);
     clearOpenNote();
+    deleteNote(note.id);
   }
 
   function handleOpenNote() {
@@ -72,15 +72,15 @@ function Note({ note }: Props) {
   return (
     <AlertDialog>
       <Dialog>
-        <div
-          onClick={handleOpenNote}
-          className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
-            isActive ? "bg-background" : "bg-secondary border-transparent"
-          }`}
-        >
-          <div className="flex items-center justify-between">
-            <h3 className="font-medium">{note.title}</h3>
-            <DropdownMenu>
+        <DropdownMenu>
+          <div
+            onClick={handleOpenNote}
+            className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
+              isActive ? "bg-background" : "bg-secondary border-transparent"
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="font-medium">{note.title}</h3>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon-sm">
                   <EllipsisVertical />
@@ -104,41 +104,41 @@ function Note({ note }: Props) {
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          <span className="text-muted-foreground">{note.description || "No description provided"}</span>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Edit note</DialogTitle>
-              <DialogDescription>Make some changes here, click save when you&apos;re done.</DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4">
-              <div className="grid gap-3">
-                <Label htmlFor="note-title">Title</Label>
-                <Input
-                  id="note-title"
-                  name="noteTitle"
-                  value={note.title}
-                  onChange={(e) => handleUpdateNote({ title: e.target.value })}
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="note-description">Description</Label>
-                <Input
-                  id="note-description"
-                  name="noteDescription"
-                  value={note.description}
-                  onChange={(e) => handleUpdateNote({ description: e.target.value })}
-                />
-              </div>
             </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button>Done</Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </div>
+            <span className="text-muted-foreground">{note.description || "No description provided"}</span>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Edit note</DialogTitle>
+                <DialogDescription>Make some changes here, click save when you&apos;re done.</DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4">
+                <div className="grid gap-3">
+                  <Label htmlFor="note-title">Title</Label>
+                  <Input
+                    id="note-title"
+                    name="noteTitle"
+                    value={note.title}
+                    onChange={(e) => handleUpdateNote({ title: e.target.value })}
+                  />
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="note-description">Description</Label>
+                  <Input
+                    id="note-description"
+                    name="noteDescription"
+                    value={note.description}
+                    onChange={(e) => handleUpdateNote({ description: e.target.value })}
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button>Done</Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </div>
+        </DropdownMenu>
       </Dialog>
       <AlertDialogContent>
         <AlertDialogHeader>

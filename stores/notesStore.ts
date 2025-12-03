@@ -100,7 +100,5 @@ export const useDeleteNote = () => useNotesStore((state) => state.deleteNote);
 export const useUpdateNote = () => useNotesStore((state) => state.updateNote);
 
 export const useOpenNote = () => useNotesStore((state) => state.getNote(state.openNote));
-export const useOpenNoteId = () => useNotesStore((state) => state.getNote(state.openNote)?.id);
-export const useOpenNoteContent = () => useNotesStore((state) => state.getNote(state.openNote)?.content);
 export const useSetOpenNote = () => useNotesStore((state) => state.setOpenNote);
 export const useClearOpenNote = () => useNotesStore((state) => state.clearOpenNote);
