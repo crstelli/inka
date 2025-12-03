@@ -1,6 +1,6 @@
 import { NotesHeading } from "@/components/NotesHeading";
-import { NotesList } from "@/components/NotesList";
 import { NotesSearch } from "@/components/NotesSearch";
+import { NotesList } from "@/components/NotesList";
 import { Pagination } from "@/components/Pagination";
 
 function NotesMenu() {

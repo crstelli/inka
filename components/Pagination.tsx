@@ -20,7 +20,7 @@ function Pagination() {
   const canNext = page < maxPage;
 
   return (
-    <PaginationComp className="[grid-area:notesPagination]">
+    <PaginationComp className="[grid-area:pagination]">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious onClick={() => canUndo && prevPage()} />
