@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import {
   useAddNote,
@@ -10,7 +10,6 @@ import {
   useSetOpenNote,
   useUpdateNote,
 } from "@/stores/notesStore";
-import { useClearEditor, useSetContent, useSetEditor } from "@/stores/editorStore";
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
@@ -19,7 +18,6 @@ import StarterKit from "@tiptap/starter-kit";
 import { FloatingMenu } from "@/components/FloatingMenu";
 import { debounce } from "@/lib/debounce";
 import { createNote } from "@/lib/createNote";
-import { DEFAULT_NOTE_NAME } from "@/lib/constants";
 
 function Editor() {
   const title = "a";
@@ -29,10 +27,6 @@ function Editor() {
   const openNote = useOpenNote();
   const openNoteId = useOpenNoteId();
   const openNoteContent = useOpenNoteContent();
-
-  const setEditor = useSetEditor();
-  const clearEditor = useClearEditor();
-  const setContent = useSetContent();
 
   const contentRef = useRef(openNoteContent);
 
@@ -49,16 +43,8 @@ function Editor() {
       },
     },
 
-    onCreate: ({ editor }) => {
-      setEditor(editor);
-    },
-
     immediatelyRender: false,
   });
-
-  useEffect(() => {
-    contentRef.current = openNoteContent;
-  }, [openNoteContent]);
 
   const handleSave = useCallback(() => {
     const content = editor?.getJSON();
@@ -90,9 +76,11 @@ function Editor() {
 
   // Sync editor with current selected note.
   useEffect(() => {
-    if (openNoteId && contentRef.current) setContent(contentRef.current);
-    else clearEditor();
-  }, [clearEditor, openNoteId, setContent]);
+    if (!editor) return;
+
+    if (openNoteId && contentRef.current) editor.commands.setContent(contentRef.current);
+    else editor.commands.clearContent();
+  }, [openNoteId, editor]);
 
   if (!editor) return null;
 
