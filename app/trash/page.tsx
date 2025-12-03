@@ -1,3 +1,3 @@
 export default function page() {
-  return <div>tags</div>;
+  return <div>trash</div>;
 }
