@@ -6,7 +6,7 @@ import { useResetPage, useSearch, useSetSearch } from "@/stores/searchStore";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 
-function Search() {
+function NotesSearch() {
   const search = useSearch();
 
   const setSearch = useSetSearch();
@@ -18,7 +18,7 @@ function Search() {
   }
 
   return (
-    <div className="bg-secondary flex items-center px-4 gap-4">
+    <div className="bg-secondary flex items-center px-4 gap-4 [grid-area:notesSearch]">
       <SearchIcon className="text-foreground" />
       <Input
         value={search}
@@ -30,5 +30,4 @@ function Search() {
     </div>
   );
 }
-
-export { Search };
+export { NotesSearch };

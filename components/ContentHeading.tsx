@@ -66,7 +66,7 @@ function ContentHeading() {
   if (!editor) return null;
 
   return (
-    <div className="bg-secondary flex items-center justify-between px-12">
+    <div className="bg-secondary flex items-center justify-between px-12 [grid-area:contentHeading]">
       {!isEmpty && (
         <div className="flex items-center gap-4">
           {isEditing ? (

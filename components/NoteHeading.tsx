@@ -3,7 +3,7 @@ import { Ellipsis, Info, ListChecks, PanelsTopLeft } from "lucide-react";
 
 function NoteHeading() {
   return (
-    <div className="px-4 items-center flex justify-between">
+    <div className="px-4 items-center flex justify-between [grid-area:noteHeading]">
       <Button size="icon" variant="secondary">
         <PanelsTopLeft />
       </Button>

@@ -55,7 +55,7 @@ function Content() {
   if (!editor) return null;
 
   return (
-    <div className="w-full overflow-auto">
+    <div className="w-full overflow-auto [grid-area:content]">
       {editor && <FloatingMenu editor={editor} />}
       <EditorContent editor={editor} />
     </div>

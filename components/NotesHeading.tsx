@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Menu, SquarePen } from "lucide-react";
 import { useClearOpenNote } from "@/stores/notesStore";
 
-function AddNote() {
+function NotesHeading() {
   const toggleSidebar = useToggleGlobalSidebar();
   const clearOpenNote = useClearOpenNote();
 
   return (
-    <div className="flex justify-between items-center px-4">
+    <div className="flex justify-between items-center px-4 [grid-area:notesHeading]">
       <Button onClick={toggleSidebar} size="icon" variant="secondary">
         <Menu />
       </Button>
@@ -21,4 +21,4 @@ function AddNote() {
   );
 }
 
-export { AddNote };
+export { NotesHeading };

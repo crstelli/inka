@@ -2,7 +2,7 @@ import { Breadcrumb as BreadcrumbComp, BreadcrumbItem, BreadcrumbList, Breadcrum
 
 function Breadcrumb() {
   return (
-    <BreadcrumbComp className="flex items-center px-4">
+    <BreadcrumbComp className="flex items-center px-4 [grid-area:breadcrumb]">
       <BreadcrumbList>
         <BreadcrumbItem>Home</BreadcrumbItem>
         <BreadcrumbSeparator />

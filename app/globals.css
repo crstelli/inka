@@ -171,3 +171,11 @@
 [data-radix-popper-content-wrapper] {
   border: 0 !important;
 }
+
+.layout {
+  grid-template-areas:
+    "notesHeading noteHeading"
+    "notesSearch contentHeading"
+    "notesList content"
+    "notesPagination breadcrumb";
+}

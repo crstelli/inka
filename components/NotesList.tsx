@@ -8,7 +8,7 @@ import { NotePlaceholder } from "@/components/NotePlaceholder";
 import { NOTES_PAGE_SIZE } from "@/lib/constants";
 import { useEffect } from "react";
 
-function Notes() {
+function NotesList() {
   const notes = useNotes();
   const search = useSearch();
 
@@ -30,7 +30,7 @@ function Notes() {
   );
 
   return (
-    <div className="p-4 flex flex-col gap-4 overflow-auto">
+    <div className="p-4 flex flex-col gap-4 overflow-auto [grid-area:notesList]">
       {paginatedNotes.map((n) => (
         <Note key={n.id} note={n} />
       ))}
@@ -38,4 +38,4 @@ function Notes() {
   );
 }
 
-export { Notes };
+export { NotesList };
