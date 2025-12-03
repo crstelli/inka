@@ -27,8 +27,6 @@ const useEditorStore = create<EditorState>((set) => ({
     }),
 }));
 
-export const useEditor = () => useEditorStore((state) => state.editor);
-
 export const useSetEditor = () => useEditorStore((state) => state.setEditor);
 export const useClearEditor = () => useEditorStore((state) => state.clearEditor);
 export const useSetContent = () => useEditorStore((state) => state.setContent);
