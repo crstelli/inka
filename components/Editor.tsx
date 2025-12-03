@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 
 import { useAddNote, useOpenNote, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
-import { debounce } from "@/lib/debounce";
-import { createNote } from "@/lib/createNote";
+import { debounce } from "@/lib/utils/debounce";
+import { createNote } from "@/lib/utils/createNote";
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";

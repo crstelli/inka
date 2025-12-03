@@ -1,10 +1,10 @@
 import "@/app/globals.css";
-import { geist } from "@/lib/font";
+import { geist } from "@/lib/next/font";
 
 import type { ReactNode } from "react";
 import { Sidebar } from "@/components/Sidebar";
 
-export { metadata } from "@/lib/metadata";
+export { metadata } from "@/lib/next/metadata";
 
 interface Props {
   children: ReactNode;

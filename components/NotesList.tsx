@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { NOTES_PAGE_SIZE } from "@/lib/constants";
+import { NOTES_PAGE_SIZE } from "@/lib/utils/constants";
 
 import { useNotes } from "@/stores/notesStore";
 import { usePage, useSearch, useSetMaxPage } from "@/stores/searchStore";
