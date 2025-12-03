@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Ellipsis, Info, ListChecks, PanelsTopLeft } from "lucide-react";
 
-function NoteHeading() {
+function Heading() {
   return (
-    <div className="px-4 items-center flex justify-between [grid-area:noteHeading]">
+    <div className="px-4 items-center flex justify-between [grid-area:heading]">
       <Button size="icon" variant="secondary">
         <PanelsTopLeft />
       </Button>
@@ -26,4 +26,4 @@ function NoteHeading() {
   );
 }
 
-export { NoteHeading };
+export { Heading };
