@@ -19,9 +19,6 @@ function Editor() {
 
   const openNote = useOpenNote();
 
-  const noteId = openNote?.id;
-  const noteContent = openNote?.content;
-
   const debounceSave = debounce(function () {
     if (!editor) return;
     const content = editor.getJSON();
@@ -58,10 +55,10 @@ function Editor() {
   useEffect(() => {
     if (!editor) return;
 
-    if (noteId && noteContent) editor.commands.setContent(noteContent, { emitUpdate: false });
+    if (openNote?.id && openNote?.content) editor.commands.setContent(openNote.content, { emitUpdate: false });
     else editor.commands.clearContent(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [noteId, editor]); // Disabled ESLint rule to avoid editor setContent on every update.
+  }, [openNote?.id, editor]); // Disabled ESLint rule to avoid editor setContent on every update.
 
   if (!editor) return null;
 
