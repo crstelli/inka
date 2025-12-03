@@ -22,6 +22,7 @@ interface NotesState {
   getNote: (id: number | undefined) => Note | undefined;
 
   loadNotes: () => void;
+
   addNote: (note: Note) => void;
   deleteNote: (id: number) => void;
   updateNote: ({ id, content, title, description }: UpdateNoteParams) => void;

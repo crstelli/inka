@@ -33,12 +33,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import type { NoteInfo } from "@/lib/noteInfoType";
 import type { Note } from "@/lib/noteType";
 import { useClearOpenNote, useDeleteNote, useOpenNoteId, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 
 interface Props {
-  note: Note;
+  note: NoteInfo;
 }
 
 interface EditParams {
