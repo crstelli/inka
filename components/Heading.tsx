@@ -20,7 +20,7 @@ function Heading() {
           <Info />
         </Button>
 
-        <div className="size-9 rounded-full bg-secondary flex items-center justify-center pointer-events-none">G</div>
+        <div className="size-9 rounded-full bg-accent flex items-center justify-center pointer-events-none">G</div>
       </div>
     </div>
   );

@@ -77,7 +77,7 @@ function Note({ note }: Props) {
           <div
             onClick={handleOpenNote}
             className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
-              isActive ? "bg-background" : "bg-secondary border-transparent"
+              isActive ? "bg-background" : "bg-accent border-transparent"
             }`}
           >
             <div className="flex items-center justify-between">

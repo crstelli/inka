@@ -18,13 +18,13 @@ function NotesSearch() {
   }
 
   return (
-    <div className="bg-secondary flex items-center px-4 gap-4 [grid-area:notesSearch]">
+    <div className="bg-accent flex items-center px-4 gap-4 [grid-area:notesSearch]">
       <SearchIcon className="text-foreground" />
       <Input
         value={search}
         onChange={handleSearch}
         name="Note Search Bar"
-        className="border-none dark:bg-secondary"
+        className="border-none dark:bg-accend"
         placeholder="Search all notes and tags"
       />
     </div>

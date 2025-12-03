@@ -14,7 +14,7 @@ function Sidebar() {
   return (
     <div className={`grid grid-rows-[50px_1fr] divide-y divide-border" ${isOpen ? "w-60" : null}`}>
       <div></div>
-      <div className="bg-secondary h-full flex flex-col row-span-3 px-4 py-10 gap-2">
+      <div className="bg-accent h-full flex flex-col row-span-3 px-4 py-10 gap-2">
         <Item isOpen={isOpen} icon={StickyNote} altPath="/">
           Notes
         </Item>
