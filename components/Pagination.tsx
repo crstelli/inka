@@ -10,6 +10,7 @@ import { useMaxPage, useMinPage, usePage, usePageNext, usePagePrev } from "@/sto
 
 function Pagination() {
   const page = usePage();
+
   const minPage = useMinPage();
   const maxPage = useMaxPage();
 
