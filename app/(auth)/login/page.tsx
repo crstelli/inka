@@ -1,24 +1,38 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Field, FieldSet } from "@/components/ui/field";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { KeyRound, Mail } from "lucide-react";
 
 export default function page() {
   return (
     <form>
       <Card>
-        <CardContent className="gap-6 flex flex-col">
-          <Field>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
-            <Input id="email" />
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="password">Password</FieldLabel>
-            <Input id="email" />
-          </Field>
-          <Field>
-            <Button type="submit">Login</Button>
-          </Field>
+        <CardHeader>
+          <CardTitle className="text-center text-lg">Login into your account</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <FieldSet>
+            <Field>
+              <InputGroup>
+                <InputGroupInput placeholder="Your email" type="email" />
+                <InputGroupAddon>
+                  <Mail />
+                </InputGroupAddon>
+              </InputGroup>
+            </Field>
+            <Field>
+              <InputGroup>
+                <InputGroupInput placeholder="Your password" type="password" />
+                <InputGroupAddon>
+                  <KeyRound />
+                </InputGroupAddon>
+              </InputGroup>
+            </Field>
+            <Field>
+              <Button type="submit">Login</Button>
+            </Field>
+          </FieldSet>
         </CardContent>
       </Card>
     </form>
