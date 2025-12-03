@@ -70,14 +70,14 @@ function Note({ note }: Props) {
   }
 
   return (
-    <div
-      onClick={handleOpenNote}
-      className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
-        isActive ? "bg-background" : "bg-secondary border-transparent"
-      }`}
-    >
-      <AlertDialog>
-        <Dialog>
+    <AlertDialog>
+      <Dialog>
+        <div
+          onClick={handleOpenNote}
+          className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
+            isActive ? "bg-background" : "bg-secondary border-transparent"
+          }`}
+        >
           <div className="flex items-center justify-between">
             <h3 className="font-medium">{note.title}</h3>
             <DropdownMenu>
@@ -134,28 +134,28 @@ function Note({ note }: Props) {
             </div>
             <DialogFooter>
               <DialogClose asChild>
-                <Button>Save changes</Button>
+                <Button>Done</Button>
               </DialogClose>
             </DialogFooter>
           </DialogContent>
-        </Dialog>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-            <AlertDialogDescription>Do you want to delete the note?</AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction asChild>
-              <Button variant="destructive" onClick={handleDeleteNote}>
-                <Trash />
-                Delete
-              </Button>
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
+        </div>
+      </Dialog>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogDescription>Do you want to delete the note?</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction asChild>
+            <Button variant="destructive" onClick={handleDeleteNote} className="text-white">
+              <Trash />
+              Delete
+            </Button>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
 
