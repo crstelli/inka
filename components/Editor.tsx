@@ -11,7 +11,7 @@ import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "@/components/FloatingMenu";
 
-function Content() {
+function Editor() {
   const openNoteId = useOpenNoteId();
   const openNoteContent = useOpenNoteContent();
 
@@ -55,11 +55,11 @@ function Content() {
   if (!editor) return null;
 
   return (
-    <div className="w-full overflow-auto [grid-area:content]">
+    <div className="w-full overflow-auto [grid-area:editor]">
       {editor && <FloatingMenu editor={editor} />}
       <EditorContent editor={editor} />
     </div>
   );
 }
 
-export { Content };
+export { Editor };

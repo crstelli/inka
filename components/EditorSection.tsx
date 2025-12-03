@@ -1,12 +1,12 @@
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { Content } from "@/components/Content";
-import { ContentHeading } from "@/components/ContentHeading";
+import { Editor } from "@/components/Editor";
+import { EditorHeading } from "@/components/EditorHeading";
 
 function EditorSection() {
   return (
     <>
-      <ContentHeading />
-      <Content />
+      <EditorHeading />
+      <Editor />
       <Breadcrumb />
     </>
   );

@@ -14,7 +14,7 @@ import { Pen, Save } from "lucide-react";
 import { DEFAULT_NOTE_NAME } from "@/lib/constants";
 import { debounce } from "@/lib/debounce";
 
-function ContentHeading() {
+function EditorHeading() {
   const [title, setTitle] = useState(DEFAULT_NOTE_NAME);
   const [isEditing, setIsEditing] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
@@ -66,7 +66,7 @@ function ContentHeading() {
   if (!editor) return null;
 
   return (
-    <div className="bg-secondary flex items-center justify-between px-12 [grid-area:contentHeading]">
+    <div className="bg-secondary flex items-center justify-between px-12 [grid-area:editorHeading]">
       {!isEmpty && (
         <div className="flex items-center gap-4">
           {isEditing ? (
@@ -90,4 +90,4 @@ function ContentHeading() {
   );
 }
 
-export { ContentHeading };
+export { EditorHeading };
