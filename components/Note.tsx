@@ -127,7 +127,7 @@ function Note({ note }: Props) {
                   <Input
                     id="note-description"
                     name="noteDescription"
-                    value={note.description}
+                    value={note.description || ""}
                     onChange={(e) => handleUpdateNote({ description: e.target.value })}
                   />
                 </div>
