@@ -36,7 +36,9 @@ export default function page() {
                 </InputGroup>
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
+                <Button asChild>
+                  <Link href="/">Login</Link>
+                </Button>
               </Field>
             </FieldSet>
           </CardContent>

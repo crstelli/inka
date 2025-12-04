@@ -44,7 +44,9 @@ export default function page() {
                 </InputGroup>
               </Field>
               <Field>
-                <Button type="submit">Signup</Button>
+                <Button type="submit">
+                  <Link href="/login">Signup</Link>
+                </Button>
               </Field>
             </FieldSet>
           </CardContent>
