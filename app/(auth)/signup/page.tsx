@@ -15,10 +15,10 @@ export default function page() {
       <form className="flex flex-col">
         <Card>
           <CardHeader>
-            <CardTitle className="text-center text-lg">Login into your account</CardTitle>
+            <CardTitle className="text-center text-lg">Create a new Account</CardTitle>
           </CardHeader>
           <CardContent>
-            <FieldSet>
+            <FieldSet className="gap-4">
               <Field>
                 <InputGroup>
                   <InputGroupInput placeholder="Your email" type="email" />
@@ -36,15 +36,23 @@ export default function page() {
                 </InputGroup>
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
+                <InputGroup>
+                  <InputGroupInput placeholder="Confirm password" type="password" />
+                  <InputGroupAddon>
+                    <KeyRound />
+                  </InputGroupAddon>
+                </InputGroup>
+              </Field>
+              <Field>
+                <Button type="submit">Signup</Button>
               </Field>
             </FieldSet>
           </CardContent>
         </Card>
         <span className="text-center mx-auto mt-2">
-          You don&apos;t have an account?{" "}
-          <Link href="/signup" className="underline">
-            Sign Up
+          You have an account?{" "}
+          <Link href="/login" className="underline">
+            Login
           </Link>
         </span>
       </form>
