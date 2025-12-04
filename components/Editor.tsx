@@ -19,19 +19,22 @@ function Editor() {
 
   const openNote = useOpenNote();
 
-  const debounceSave = debounce(function () {
-    if (!editor) return;
-    const content = editor.getJSON();
+  const debounceSave = () => {
+    console.log("a");
+    debounce(function () {
+      if (!editor) return;
+      const content = editor.getJSON();
 
-    if (openNote) {
-      updateNote({ id: openNote.id, content });
-    } else {
-      const newNote = createNote({ content });
+      if (openNote) {
+        updateNote({ id: openNote.id, content });
+      } else {
+        const newNote = createNote({ content });
 
-      addNote(newNote);
-      setOpenNote(newNote.id);
-    }
-  }, 500);
+        addNote(newNote);
+        setOpenNote(newNote.id);
+      }
+    }, 500);
+  };
 
   const editor = useEditor({
     extensions: [
