@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { useAddNote, useOpenNote, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
+import { useAddNote, useOpenNote, useSetOpenNote, useSetSavingStatus, useUpdateNote } from "@/stores/notesStore";
 import { debounce } from "@/lib/utils/debounce";
 import { createNote } from "@/lib/utils/createNote";
 
@@ -16,25 +16,30 @@ function Editor() {
   const addNote = useAddNote();
   const updateNote = useUpdateNote();
   const setOpenNote = useSetOpenNote();
+  const setSavingStatus = useSetSavingStatus();
 
   const openNote = useOpenNote();
 
-  const debounceSave = () => {
-    console.log("a");
-    debounce(function () {
-      if (!editor) return;
-      const content = editor.getJSON();
+  const debounceSave = debounce(function () {
+    if (!editor) return;
+    const content = editor.getJSON();
 
-      if (openNote) {
-        updateNote({ id: openNote.id, content });
-      } else {
-        const newNote = createNote({ content });
+    if (openNote) {
+      updateNote({ id: openNote.id, content });
+    } else {
+      const newNote = createNote({ content });
 
-        addNote(newNote);
-        setOpenNote(newNote.id);
-      }
-    }, 500);
-  };
+      addNote(newNote);
+      setOpenNote(newNote.id);
+    }
+
+    setSavingStatus(false);
+  }, 500);
+
+  function handleSave() {
+    setSavingStatus(true);
+    debounceSave();
+  }
 
   const editor = useEditor({
     extensions: [
@@ -49,7 +54,7 @@ function Editor() {
       },
     },
 
-    onUpdate: debounceSave,
+    onUpdate: handleSave,
 
     immediatelyRender: false,
   });
