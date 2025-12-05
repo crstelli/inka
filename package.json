@@ -21,6 +21,7 @@
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@tiptap/extension-list": "^3.12.1",
     "@tiptap/extensions": "^3.11.1",
     "@tiptap/pm": "^3.11.1",
     "@tiptap/react": "^3.11.1",

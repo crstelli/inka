@@ -8,6 +8,8 @@ import { createNote } from "@/lib/utils/createNote";
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
+import { ListKit, TaskList } from "@tiptap/extension-list";
+
 import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "@/components/FloatingMenu";
@@ -44,6 +46,8 @@ function Editor() {
   const editor = useEditor({
     extensions: [
       StarterKit,
+      ListKit,
+      TaskList,
       Placeholder.configure({
         placeholder: "Start by writing something...",
       }),
