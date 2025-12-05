@@ -6,7 +6,7 @@ import { useEditorState } from "@tiptap/react";
 
 import { Button } from "./ui/button";
 import { ButtonGroup } from "./ui/button-group";
-import { List } from "lucide-react";
+import { Check, List, SquareCheck } from "lucide-react";
 
 interface Props {
   editor: Editor;
@@ -29,6 +29,7 @@ function FloatingMenu({ editor }: Props) {
         isStrike: editor.isActive("strike"),
 
         isUnorderedList: editor.isActive("bulletList"),
+        isTodo: editor.isActive("taskList"),
       };
     },
   });
@@ -93,6 +94,14 @@ function FloatingMenu({ editor }: Props) {
             aria-label="Bullet List"
           >
             <List />
+          </Button>
+          <Button
+            variant={editorState?.isTodo ? "default" : "secondary"}
+            className="line-through border"
+            onClick={() => editor.chain().focus().toggleTaskList().run()}
+            aria-label="To do List"
+          >
+            <SquareCheck />
           </Button>
         </ButtonGroup>
       </ButtonGroup>
