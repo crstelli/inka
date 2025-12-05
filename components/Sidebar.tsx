@@ -47,7 +47,7 @@ function Item({ children, icon: Icon, altPath, isOpen }: ItemProps) {
   const isActive = "/" + path === pathname || (altPath === "/" && pathname === "/");
 
   return (
-    <Button variant={isActive ? "secondary" : "ghost"} className="justify-start" asChild>
+    <Button variant={isActive ? "secondary" : "ghost"} className="justify-start hover:bg-background" asChild>
       <Link href={path}>
         <Icon />
         {isOpen && <span>{children}</span>}
