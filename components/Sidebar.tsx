@@ -44,7 +44,7 @@ function Item({ children, icon: Icon, altPath, isOpen }: ItemProps) {
   const path = altPath || children.toLowerCase();
   const pathname = usePathname();
 
-  const isActive = path === pathname;
+  const isActive = "/" + path === pathname || (altPath === "/" && pathname === "/");
 
   return (
     <Button variant={isActive ? "secondary" : "ghost"} className="justify-start" asChild>
