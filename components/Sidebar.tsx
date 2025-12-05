@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-import { Settings, StickyNote, Tag, Trash } from "lucide-react";
+import { Settings, StickyNote, Trash } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -17,9 +17,6 @@ function Sidebar() {
       <div className="bg-accent h-full flex flex-col row-span-3 px-4 py-10 gap-2">
         <Item isOpen={isOpen} icon={StickyNote} altPath="/">
           Notes
-        </Item>
-        <Item isOpen={isOpen} icon={Tag}>
-          Tags
         </Item>
         <Item isOpen={isOpen} icon={Trash}>
           Trash
