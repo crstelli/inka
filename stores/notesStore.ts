@@ -17,6 +17,8 @@ interface UpdateNoteParams extends UpdateOpenNoteParams {
 
 interface NotesState {
   notes: Note[];
+  trashNotes: Note[];
+
   isSaving: boolean;
   openNote: number | undefined;
 
@@ -43,6 +45,8 @@ const useNotesStore = create(
 
     return {
       notes: [],
+      trashNotes: [],
+
       isSaving: false,
       openNote: undefined,
 
@@ -67,7 +71,12 @@ const useNotesStore = create(
 
       deleteNote: (id) =>
         set((state) => {
+          const note = state.getNote(id);
+          if (!note) return;
+
           state.notes = state.notes.filter((n) => n.id !== id);
+          state.trashNotes.push(note);
+
           saveStateDebounced();
         }),
 
@@ -104,6 +113,7 @@ const useNotesStore = create(
 );
 
 export const useNotes = () => useNotesStore((state) => state.notes);
+export const useTrashNotes = () => useNotesStore((state) => state.trashNotes);
 
 export const useLoadNotes = () => useNotesStore((state) => state.loadNotes);
 export const useAddNote = () => useNotesStore((state) => state.addNote);
