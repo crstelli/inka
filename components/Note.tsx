@@ -35,7 +35,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { NoteInfo } from "@/lib/types/noteInfoType";
 import type { Note } from "@/lib/types/noteType";
-import { useClearOpenNote, useDeleteNote, useOpenNoteId, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
+import { useClearOpenNote, useTrashNote, useOpenNoteId, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 
 interface Props {
@@ -48,7 +48,7 @@ interface EditParams {
 }
 
 function Note({ note }: Props) {
-  const deleteNote = useDeleteNote();
+  const trashNote = useTrashNote();
   const updateNote = useUpdateNote();
 
   const openNoteId = useOpenNoteId();
@@ -57,9 +57,9 @@ function Note({ note }: Props) {
 
   const isActive = openNoteId === note.id;
 
-  function handleDeleteNote() {
+  function handleTrashNote() {
     clearOpenNote();
-    deleteNote(note.id);
+    trashNote(note.id);
   }
 
   function handleOpenNote() {
@@ -149,7 +149,7 @@ function Note({ note }: Props) {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
-            <Button variant="destructive" onClick={handleDeleteNote} className="text-white">
+            <Button variant="destructive" onClick={handleTrashNote} className="text-white">
               <Trash />
               Delete
             </Button>

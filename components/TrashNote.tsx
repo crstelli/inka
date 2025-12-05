@@ -30,7 +30,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Note } from "@/lib/types/noteType";
-import { useDeleteNote, useRestoreNote } from "@/stores/notesStore";
+import { useRestoreNote } from "@/stores/notesStore";
 import { EllipsisVertical, RotateCcw, Trash } from "lucide-react";
 import { useState } from "react";
 
