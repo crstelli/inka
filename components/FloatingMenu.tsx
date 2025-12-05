@@ -36,7 +36,7 @@ function FloatingMenu({ editor }: Props) {
 
   return (
     <FloatingMenuApi editor={editor} className="-translate-y-full">
-      <ButtonGroup className="shadow-[0px_0px_50px_5px_#181c1f]">
+      <ButtonGroup className="dark:shadow-[0px_0px_50px_5px_#181c1f]">
         <ButtonGroup>
           <Button
             variant={editorState?.isH1 ? "default" : "secondary"}
