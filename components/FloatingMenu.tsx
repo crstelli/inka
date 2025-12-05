@@ -6,7 +6,7 @@ import { useEditorState } from "@tiptap/react";
 
 import { Button } from "./ui/button";
 import { ButtonGroup } from "./ui/button-group";
-import { Check, List, SquareCheck } from "lucide-react";
+import { List, SquareCheck } from "lucide-react";
 
 interface Props {
   editor: Editor;
