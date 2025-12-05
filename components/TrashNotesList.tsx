@@ -7,7 +7,7 @@ function TrashNotesList() {
   const trashNotes = useTrashNotes();
 
   return (
-    <div className="mt-20 flex flex-col w-full max-w-[500px]">
+    <div className="mt-20 flex gap-4 flex-col w-full max-w-[500px]">
       {trashNotes.length > 0 ? (
         trashNotes.map((n) => <TrashNote note={n} key={n.id} />)
       ) : (
