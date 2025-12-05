@@ -9,7 +9,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +19,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   DropdownMenu,
@@ -31,111 +29,86 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import type { NoteInfo } from "@/lib/types/noteInfoType";
-import { useClearOpenNote, useDeleteNote, useOpenNoteId, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
-import { Edit, EllipsisVertical, RotateCcw, Trash } from "lucide-react";
+import { useDeleteNote } from "@/stores/notesStore";
+import { EllipsisVertical, RotateCcw, Trash } from "lucide-react";
+import { useState } from "react";
 
 interface Props {
   note: NoteInfo;
 }
 
-interface EditParams {
-  title?: string;
-  description?: string;
-}
-
 function TrashNote({ note }: Props) {
+  const [openDialog, setOpenDialog] = useState<null | "delete" | "restore">(null);
   const deleteNote = useDeleteNote();
-  const updateNote = useUpdateNote();
 
-  function handleDeleteNote() {
-    deleteNote(note.id);
-  }
+  function handleDelete() {}
+
+  function handleRestore() {}
 
   return (
-    <AlertDialog>
-      <Dialog>
-        <DropdownMenu>
-          <div className="h-25 group rounded-md p-3 border flex flex-col cursor-pointer bg-accent border-transparent">
-            <div className="flex items-center justify-between">
-              <h3 className="font-medium">{note.title}</h3>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon-sm">
-                  <EllipsisVertical />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>{note.title}</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <DropdownMenuItem asChild>
-                    <DialogTrigger className="w-full">
-                      <RotateCcw />
-                      Restore
-                    </DialogTrigger>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild variant="destructive">
-                    <AlertDialogTrigger className="w-full">
-                      <Trash />
-                      Remove
-                    </AlertDialogTrigger>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </div>
-            <span className="text-muted-foreground">{note.description || "No description provided"}</span>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Edit note</DialogTitle>
-                <DialogDescription>Make some changes here, click save when you&apos;re done.</DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4">
-                <div className="grid gap-3">
-                  <Label htmlFor="note-title">Title</Label>
-                  <Input
-                    id="note-title"
-                    name="noteTitle"
-                    value={note.title}
-                    onChange={(e) => handleUpdateNote({ title: e.target.value })}
-                  />
-                </div>
-                <div className="grid gap-3">
-                  <Label htmlFor="note-description">Description</Label>
-                  <Input
-                    id="note-description"
-                    name="noteDescription"
-                    value={note.description || ""}
-                    onChange={(e) => handleUpdateNote({ description: e.target.value })}
-                  />
-                </div>
-              </div>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button>Done</Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogContent>
+    <>
+      <DropdownMenu>
+        <div className="h-25 group rounded-md p-3 border flex flex-col cursor-pointer bg-accent border-transparent">
+          <div className="flex items-center justify-between">
+            <h3 className="font-medium">{note.title}</h3>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon-sm">
+                <EllipsisVertical />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>{note.title}</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem onClick={() => setOpenDialog("restore")}>
+                  <RotateCcw />
+                  Restore
+                </DropdownMenuItem>
+                <DropdownMenuItem variant="destructive" onClick={() => setOpenDialog("delete")}>
+                  <Trash />
+                  Remove
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
           </div>
-        </DropdownMenu>
+          <span className="text-muted-foreground">{note.description || "No description provided"}</span>
+        </div>
+      </DropdownMenu>
+      <Dialog open={openDialog === "restore"}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Restore note</DialogTitle>
+            <DialogDescription>Restore your note and add it back to all notes.</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild onClick={() => setOpenDialog(null)}>
+              <Button variant={"secondary"}>Cancel</Button>
+            </DialogClose>
+            <DialogClose asChild onClick={() => handleRestore()}>
+              <Button>Restore</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
       </Dialog>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-          <AlertDialogDescription>Do you want to delete the note?</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction asChild>
-            <Button variant="destructive" onClick={handleDeleteNote} className="text-white">
-              <Trash />
-              Delete
-            </Button>
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+
+      <AlertDialog open={openDialog === "delete"}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Note</AlertDialogTitle>
+            <AlertDialogDescription>Do you want to permanently delete this note?</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel asChild onClick={() => setOpenDialog(null)}>
+              <Button variant="secondary">Cancel</Button>
+            </AlertDialogCancel>
+            <AlertDialogAction asChild onClick={() => handleDelete()}>
+              <Button variant="destructive">Delete</Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
 
