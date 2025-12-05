@@ -28,6 +28,7 @@ interface NotesState {
 
   addNote: (note: Note) => void;
   trashNote: (id: number) => void;
+  deleteNote: (id: number) => void;
   restoreNote: (note: Note) => void;
   updateNote: ({ id, content, title, description }: UpdateNoteParams) => void;
 
@@ -81,6 +82,12 @@ const useNotesStore = create(
           saveStateDebounced();
         }),
 
+      deleteNote: (id) =>
+        set((state) => {
+          state.trashNotes = state.trashNotes.filter((n) => n.id !== id);
+          saveStateDebounced();
+        }),
+
       restoreNote: (note) =>
         set((state) => {
           state.notes.push(note);
@@ -127,6 +134,7 @@ export const useTrashNotes = () => useNotesStore((state) => state.trashNotes);
 export const useLoadNotes = () => useNotesStore((state) => state.loadNotes);
 export const useAddNote = () => useNotesStore((state) => state.addNote);
 export const useTrashNote = () => useNotesStore((state) => state.trashNote);
+export const useDeleteNote = () => useNotesStore((state) => state.deleteNote);
 export const useRestoreNote = () => useNotesStore((state) => state.restoreNote);
 export const useUpdateNote = () => useNotesStore((state) => state.updateNote);
 
