@@ -42,9 +42,13 @@ function TrashNote({ note }: Props) {
   const [openDialog, setOpenDialog] = useState<null | "delete" | "restore">(null);
   const deleteNote = useDeleteNote();
 
-  function handleDelete() {}
+  function handleDelete() {
+    setOpenDialog(null);
+  }
 
-  function handleRestore() {}
+  function handleRestore() {
+    setOpenDialog(null);
+  }
 
   return (
     <>
