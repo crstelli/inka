@@ -41,8 +41,11 @@ interface NotesState {
 const useNotesStore = create(
   immer<NotesState>((set, get) => {
     const saveStateDebounced = debounce(() => {
-      const state = get().notes;
-      localStorage.setItem("notes", JSON.stringify(state));
+      const notes = get().notes;
+      const trashNotes = get().trashNotes;
+
+      localStorage.setItem("notes", JSON.stringify(notes));
+      localStorage.setItem("trashNotes", JSON.stringify(trashNotes));
     }, 500);
 
     return {
@@ -56,13 +59,22 @@ const useNotesStore = create(
       getNote: (id) => get().notes.find((n) => n.id === id),
 
       loadNotes: () => {
-        const raw = localStorage.getItem("notes");
-        if (!raw) return;
+        const rawNotes = localStorage.getItem("notes");
+        const rawTrashNotes = localStorage.getItem("trashNotes");
 
-        try {
-          const data = JSON.parse(raw);
-          set({ notes: data });
-        } catch {}
+        if (rawNotes) {
+          try {
+            const data = JSON.parse(rawNotes);
+            set({ notes: data });
+          } catch {}
+        }
+
+        if (rawTrashNotes) {
+          try {
+            const data = JSON.parse(rawTrashNotes);
+            set({ trashNotes: data });
+          } catch {}
+        }
       },
 
       addNote: (note) =>
