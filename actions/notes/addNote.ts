@@ -9,7 +9,7 @@ interface Note {
 
 async function addNote(note: Note) {
   const user = await getUser();
-  prisma.note.create({ data: { ...note, user_id: user.id } });
+  await prisma.note.create({ data: { ...note, user_id: user.id } });
 }
 
 export { addNote };
