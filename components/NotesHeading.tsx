@@ -1,3 +1,5 @@
+"use client";
+
 import { useToggleGlobalSidebar } from "@/stores/menusStore";
 
 import { Button } from "@/components/ui/button";
