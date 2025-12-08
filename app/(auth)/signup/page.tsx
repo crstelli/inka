@@ -2,10 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldSet } from "@/components/ui/field";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import { KeyRound, Mail } from "lucide-react";
 import Link from "next/link";
+import { redirect, RedirectType } from "next/navigation";
 
-export default function page() {
+export default async function page() {
+  const user = await getCurrentUser();
+  if (user) redirect("/", RedirectType.replace);
+
   return (
     <>
       <div className="text-center">
@@ -43,9 +48,11 @@ export default function page() {
                   </InputGroupAddon>
                 </InputGroup>
               </Field>
+            </FieldSet>
+            <FieldSet className="mt-6">
               <Field>
                 <Button type="submit">
-                  <Link href="/login">Signup</Link>
+                  <Link href="/login">Sign Up</Link>
                 </Button>
               </Field>
             </FieldSet>
