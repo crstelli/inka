@@ -2,7 +2,7 @@
 import { signIn } from "@/lib/auth";
 
 async function signInWithGoogle() {
-  return signIn("google");
+  return signIn("google", { redirectTo: "/" });
 }
 
 export { signInWithGoogle };
