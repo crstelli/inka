@@ -7,8 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 
 import { KeyRound, Mail } from "lucide-react";
+import { getCurrentUser } from "@/lib/getCurrentUser";
+import { redirect, RedirectType } from "next/navigation";
 
-export default function page() {
+export default async function page() {
+  const user = await getCurrentUser();
+  if (user) redirect("/", RedirectType.replace);
+
   return (
     <>
       <div className="text-center">
