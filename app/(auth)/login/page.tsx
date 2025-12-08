@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { signinWithGoogle } from "@/actions/signInWithGoogle";
+import { signinWithGoogle } from "@/actions/auth/signInWithGoogle";
 
 import { Button } from "@/components/ui/button";
 import { Field, FieldSet } from "@/components/ui/field";

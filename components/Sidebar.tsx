@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { signout } from "@/actions/signout";
+import { signout } from "@/actions/auth/signout";
 
 import { LogOut, Settings, StickyNote, Trash } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
