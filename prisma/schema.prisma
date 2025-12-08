@@ -31,5 +31,5 @@ model Note {
   user    User    @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @default(now())
 }
