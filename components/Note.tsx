@@ -33,13 +33,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { NoteInfo } from "@/lib/types/noteInfoType";
-import type { Note } from "@/lib/types/noteType";
+import type { Note as NoteType } from "@/lib/types/noteType";
 import { useClearOpenNote, useTrashNote, useOpenNoteId, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
+import { useOpenNote } from "@/stores/openNoteStore";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 
 interface Props {
-  note: NoteInfo;
+  note: NoteType;
 }
 
 interface EditParams {
@@ -48,36 +48,36 @@ interface EditParams {
 }
 
 function Note({ note }: Props) {
-  const trashNote = useTrashNote();
-  const updateNote = useUpdateNote();
+  const openNote = useOpenNote();
+  const isOpen = openNote === note.id;
 
-  const openNoteId = useOpenNoteId();
-  const setOpenNote = useSetOpenNote();
-  const clearOpenNote = useClearOpenNote();
+  // const trashNote = useTrashNote();
+  // const updateNote = useUpdateNote();
 
-  const isActive = openNoteId === note.id;
+  // const openNoteId = useOpenNoteId();
+  // const setOpenNote = useSetOpenNote();
+  // const clearOpenNote = useClearOpenNote();
 
-  function handleTrashNote() {
-    clearOpenNote();
-    trashNote(note.id);
-  }
+  // function handleTrashNote() {
+  //   clearOpenNote();
+  //   trashNote(note.id);
+  // }
 
-  function handleOpenNote() {
-    setOpenNote(note.id);
-  }
+  // function handleOpenNote() {
+  //   setOpenNote(note.id);
+  // }
 
-  function handleUpdateNote({ title, description }: EditParams) {
-    updateNote({ id: note.id, title, description });
-  }
+  // function handleUpdateNote({ title, description }: EditParams) {
+  //   updateNote({ id: note.id, title, description });
+  // }
 
   return (
     <AlertDialog>
       <Dialog>
         <DropdownMenu>
           <div
-            onClick={handleOpenNote}
             className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
-              isActive ? "bg-background" : "bg-accent border-transparent"
+              isOpen ? "bg-background" : "bg-accent border-transparent"
             }`}
           >
             <div className="flex items-center justify-between">
@@ -115,21 +115,11 @@ function Note({ note }: Props) {
               <div className="grid gap-4">
                 <div className="grid gap-3">
                   <Label htmlFor="note-title">Title</Label>
-                  <Input
-                    id="note-title"
-                    name="noteTitle"
-                    value={note.title}
-                    onChange={(e) => handleUpdateNote({ title: e.target.value })}
-                  />
+                  <Input id="note-title" name="noteTitle" value={note.title} />
                 </div>
                 <div className="grid gap-3">
                   <Label htmlFor="note-description">Description</Label>
-                  <Input
-                    id="note-description"
-                    name="noteDescription"
-                    value={note.description || ""}
-                    onChange={(e) => handleUpdateNote({ description: e.target.value })}
-                  />
+                  <Input id="note-description" name="noteDescription" value={note.description || ""} />
                 </div>
               </div>
               <DialogFooter>
@@ -149,7 +139,7 @@ function Note({ note }: Props) {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
-            <Button variant="destructive" onClick={handleTrashNote} className="text-white">
+            <Button variant="destructive" className="text-white">
               <Trash />
               Delete
             </Button>

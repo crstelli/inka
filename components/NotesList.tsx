@@ -1,16 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
 import { NOTES_PAGE_SIZE } from "@/lib/utils/constants";
 
-import { useNotes } from "@/stores/notesStore";
 import { usePage, useSearch, useSetMaxPage } from "@/stores/searchStore";
 
 import { Note } from "@/components/Note";
 import { NotePlaceholder } from "@/components/NotePlaceholder";
+import type { Note as NoteType } from "@/lib/types/noteType";
+import { useEffect } from "react";
 
-function NotesList() {
-  const notes = useNotes();
+interface Props {
+  notes: NoteType[];
+}
+
+function NotesList({ notes }: Props) {
   const search = useSearch();
   const page = usePage();
 

@@ -1,7 +1,5 @@
 export interface NoteInfo {
-  id: number;
-  created_at: string;
-
+  created_at: Date;
   title: string;
-  description?: string;
+  description: string | null;
 }
