@@ -1,8 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { signout } from "@/actions/signout";
 
-import { Settings, StickyNote, Trash } from "lucide-react";
+import { LogOut, Settings, StickyNote, Trash } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -24,6 +25,10 @@ function Sidebar() {
         <Item isOpen={isOpen} icon={Settings}>
           Settings
         </Item>
+        <Button onClick={signout} variant="ghost" className="justify-start hover:bg-background mt-auto">
+          <LogOut />
+          {isOpen && <span>Logout</span>}
+        </Button>
       </div>
     </div>
   );
