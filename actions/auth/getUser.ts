@@ -12,6 +12,8 @@ async function getUser() {
     },
   });
 
+  if (!user) throw new Error("User does not exists.");
+
   return user;
 }
 
