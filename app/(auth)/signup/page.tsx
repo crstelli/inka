@@ -43,9 +43,11 @@ export default function page() {
                   </InputGroupAddon>
                 </InputGroup>
               </Field>
+            </FieldSet>
+            <FieldSet className="mt-6">
               <Field>
                 <Button type="submit">
-                  <Link href="/login">Signup</Link>
+                  <Link href="/login">Sign Up</Link>
                 </Button>
               </Field>
             </FieldSet>

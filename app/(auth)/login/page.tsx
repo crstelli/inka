@@ -18,7 +18,7 @@ export default function page() {
             <CardTitle className="text-center text-lg">Login into your account</CardTitle>
           </CardHeader>
           <CardContent>
-            <FieldSet>
+            <FieldSet className="gap-4">
               <Field>
                 <InputGroup>
                   <InputGroupInput placeholder="Your email" type="email" />
@@ -35,6 +35,8 @@ export default function page() {
                   </InputGroupAddon>
                 </InputGroup>
               </Field>
+            </FieldSet>
+            <FieldSet className="mt-6">
               <Field>
                 <Button asChild>
                   <Link href="/">Login</Link>
