@@ -34,9 +34,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { Note as NoteType } from "@/lib/types/noteType";
-import { useClearOpenNote, useTrashNote, useOpenNoteId, useSetOpenNote, useUpdateNote } from "@/stores/notesStore";
+import { useClearOpenNote, useTrashNote, useOpenNoteId, useUpdateNote } from "@/stores/notesStore";
 import { useOpenNote } from "@/stores/openNoteStore";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
+import { useSetOpenNote } from "@/stores/openNoteStore";
 
 interface Props {
   note: NoteType;
@@ -51,6 +52,9 @@ function Note({ note }: Props) {
   const openNote = useOpenNote();
   const isOpen = openNote === note.id;
 
+  const setOpenNote = useSetOpenNote();
+  const handleOpenNote = () => (isOpen ? setOpenNote("") : setOpenNote(note.id));
+
   // const trashNote = useTrashNote();
   // const updateNote = useUpdateNote();
 
@@ -63,10 +67,6 @@ function Note({ note }: Props) {
   //   trashNote(note.id);
   // }
 
-  // function handleOpenNote() {
-  //   setOpenNote(note.id);
-  // }
-
   // function handleUpdateNote({ title, description }: EditParams) {
   //   updateNote({ id: note.id, title, description });
   // }
@@ -76,6 +76,7 @@ function Note({ note }: Props) {
       <Dialog>
         <DropdownMenu>
           <div
+            onClick={handleOpenNote}
             className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
               isOpen ? "bg-background" : "bg-accent border-transparent"
             }`}
