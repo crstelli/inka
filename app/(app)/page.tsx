@@ -3,10 +3,12 @@ import { Heading } from "@/components/Heading";
 import { EditorSection } from "@/components/EditorSection";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { redirect, RedirectType } from "next/navigation";
+import { loadNotes } from "@/actions/notes/loadNotes";
 
 export default async function page() {
   const user = await getCurrentUser();
   if (!user) redirect("/login", RedirectType.replace);
+  loadNotes();
   // const loadNotes = useLoadNotes();
 
   // useEffect(() => {
