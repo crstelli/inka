@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-import type { Note } from "@/lib/types/noteType";
 import type { JSONContent } from "@tiptap/react";
+import type { Note } from "@/lib/types/noteType";
 import { debounce } from "@/lib/utils/debounce";
 
 interface UpdateOpenNoteParams {
@@ -61,14 +61,12 @@ const useNotesStore = create(
       loadNotes: () => {
         const rawNotes = localStorage.getItem("notes");
         const rawTrashNotes = localStorage.getItem("trashNotes");
-
         if (rawNotes) {
           try {
             const data = JSON.parse(rawNotes);
             set({ notes: data });
           } catch {}
         }
-
         if (rawTrashNotes) {
           try {
             const data = JSON.parse(rawTrashNotes);
