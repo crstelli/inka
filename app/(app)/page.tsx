@@ -13,8 +13,9 @@ export default async function Page() {
   //   loadNotes();
   // }, [loadNotes]);
 
-  const users = await prisma.user.findMany();
-  console.log(users);
+  // const user = await prisma.user.create({ data: { email: "giuseppe@crescitelli.dev", name: "Giuseppe" } });
+
+  const user = await prisma.user.create({ data: { email: "giuseppe@crescitelli.dev", name: "Giuseppe" } });
 
   return (
     <div className="grid grid-cols-[3fr_10fr] divide-solid divide-x divide-y grid-rows-[50px_50px_1fr_50px] layout">
