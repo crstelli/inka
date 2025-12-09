@@ -1,10 +1,10 @@
 "use client";
 
 import { useToggleSidebar } from "@/stores/menusStore";
+import { useClearOpenNote } from "@/stores/openNoteStore";
 
 import { Button } from "@/components/ui/button";
 import { Menu, SquarePen } from "lucide-react";
-import { useSetOpenNote } from "@/stores/openNoteStore";
 
 interface Props {
   count: number;
@@ -12,7 +12,7 @@ interface Props {
 
 function NotesHeading({ count }: Props) {
   const toggleSidebar = useToggleSidebar();
-  const setOpenNote = useSetOpenNote();
+  const clearOpenNote = useClearOpenNote();
 
   return (
     <div className="flex justify-between items-center px-4 [grid-area:notesHeading]">
@@ -20,7 +20,7 @@ function NotesHeading({ count }: Props) {
         <Menu />
       </Button>
       <span className="font-semibold">All Notes ({count})</span>
-      <Button onClick={() => setOpenNote("")} size="icon" variant="secondary">
+      <Button onClick={clearOpenNote} size="icon" variant="secondary">
         <SquarePen />
       </Button>
     </div>
