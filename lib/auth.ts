@@ -27,3 +27,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
 });
+
+export async function getUser() {
+  const session = await auth();
+  if (!session?.user?.email) throw new Error("User not logged in.");
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  });
+
+  if (!user) throw new Error("User does not exists.");
+
+  return user;
+}

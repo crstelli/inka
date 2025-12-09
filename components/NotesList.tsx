@@ -6,11 +6,11 @@ import { usePage, useSearch, useSetMaxPage } from "@/stores/searchStore";
 
 import { Note } from "@/components/Note";
 import { NotePlaceholder } from "@/components/NotePlaceholder";
-import type { Note as NoteType } from "@/lib/types/noteType";
 import { useEffect } from "react";
+import type { NoteInfo } from "@/lib/types/NoteInfo";
 
 interface Props {
-  notes: NoteType[];
+  notes: NoteInfo[];
 }
 
 function NotesList({ notes }: Props) {

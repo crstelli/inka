@@ -1,4 +1,7 @@
-import { getNotes } from "@/actions/notes/getNotes";
+import prisma from "@/lib/prisma/prisma";
+
+import { getUser } from "@/lib/auth";
+import type { NoteInfo } from "@/lib/types/NoteInfo";
 
 import { NotesHeading } from "@/components/NotesHeading";
 import { NotesSearch } from "@/components/NotesSearch";
@@ -6,13 +9,17 @@ import { NotesList } from "@/components/NotesList";
 import { Pagination } from "@/components/Pagination";
 
 async function NotesMenu() {
-  const notes = await getNotes();
+  const user = await getUser();
+  const notesInfo: NoteInfo[] = await prisma.note.findMany({
+    where: { user_id: user.id },
+    select: { id: true, title: true, description: true, updated_at: true, created_at: true },
+  });
 
   return (
     <>
-      <NotesHeading />
+      <NotesHeading count={notesInfo.length} />
       <NotesSearch />
-      <NotesList notes={notes} />
+      <NotesList notes={notesInfo} />
       <Pagination />
     </>
   );

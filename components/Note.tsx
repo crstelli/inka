@@ -33,28 +33,28 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { Note as NoteType } from "@/lib/types/noteType";
-import { useClearOpenNote, useTrashNote, useOpenNoteId, useUpdateNote } from "@/stores/notesStore";
+// import type { Note as NoteType } from "@/lib/types/noteType";
+// import { useClearOpenNote, useTrashNote, useOpenNoteId, useUpdateNote } from "@/stores/notesStore";
 import { useOpenNote } from "@/stores/openNoteStore";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 import { useSetOpenNote } from "@/stores/openNoteStore";
+import type { NoteInfo } from "@/lib/types/NoteInfo";
 
 interface Props {
-  note: NoteType;
+  note: NoteInfo;
 }
 
-interface EditParams {
-  title?: string;
-  description?: string;
-}
+// interface EditParams {
+//   title?: string;
+//   description?: string;
+// }
 
 function Note({ note }: Props) {
   const openNote = useOpenNote();
-  const isOpen = openNote === note.id;
-
   const setOpenNote = useSetOpenNote();
-  const handleOpenNote = () => (isOpen ? setOpenNote("") : setOpenNote(note.id));
 
+  const handleOpenNote = () => (isOpen ? setOpenNote("") : setOpenNote(note.id));
+  const isOpen = openNote === note.id;
   // const trashNote = useTrashNote();
   // const updateNote = useUpdateNote();
 
@@ -82,7 +82,7 @@ function Note({ note }: Props) {
             }`}
           >
             <div className="flex items-center justify-between">
-              <h3 className="font-medium">{note.title}</h3>
+              <h3 className="font-medium text-xl">{note.title}</h3>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon-sm">
                   <EllipsisVertical />
@@ -107,7 +107,7 @@ function Note({ note }: Props) {
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </div>
-            <span className="text-muted-foreground">{note.description || "No description provided"}</span>
+            <span className="text-muted-foreground">{note.description || null}</span>
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Edit note</DialogTitle>

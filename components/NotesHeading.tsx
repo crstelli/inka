@@ -6,7 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Menu, SquarePen } from "lucide-react";
 import { useClearOpenNote } from "@/stores/notesStore";
 
-function NotesHeading() {
+interface Props {
+  count: number;
+}
+
+function NotesHeading({ count }: Props) {
   const toggleSidebar = useToggleGlobalSidebar();
   const clearOpenNote = useClearOpenNote();
 
@@ -15,7 +19,7 @@ function NotesHeading() {
       <Button onClick={toggleSidebar} size="icon" variant="secondary">
         <Menu />
       </Button>
-      <span className="font-semibold">All Notes</span>
+      <span className="font-semibold">All Notes ({count})</span>
       <Button onClick={clearOpenNote} size="icon" variant="secondary">
         <SquarePen />
       </Button>

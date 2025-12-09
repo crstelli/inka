@@ -14,34 +14,40 @@ import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "@/components/FloatingMenu";
 
-function Editor() {
+import type { Note } from "@/lib/types/noteType";
+
+interface Props {
+  note: Note | null;
+}
+
+function Editor({ note }: Props) {
   const addNote = useAddNote();
   const updateNote = useUpdateNote();
   const setOpenNote = useSetOpenNote();
   const setSavingStatus = useSetSavingStatus();
 
-  const openNote = useOpenNote();
+  // const openNote = useOpenNote();
 
-  const debounceSave = debounce(function () {
-    if (!editor) return;
-    const content = editor.getJSON();
+  // const debounceSave = debounce(function () {
+  //   if (!editor) return;
+  //   const content = editor.getJSON();
 
-    if (openNote) {
-      updateNote({ id: openNote.id, content });
-    } else {
-      const newNote = createNote({ content });
+  //   if (openNote) {
+  //     updateNote({ id: openNote.id, content });
+  //   } else {
+  //     const newNote = createNote({ content });
 
-      addNote(newNote);
-      setOpenNote(newNote.id);
-    }
+  //     addNote(newNote);
+  //     setOpenNote(newNote.id);
+  //   }
 
-    setSavingStatus(false);
-  }, 500);
+  //   setSavingStatus(false);
+  // }, 500);
 
-  function handleSave() {
-    setSavingStatus(true);
-    debounceSave();
-  }
+  // function handleSave() {
+  //   setSavingStatus(true);
+  //   debounceSave();
+  // }
 
   const editor = useEditor({
     extensions: [
@@ -58,7 +64,7 @@ function Editor() {
       },
     },
 
-    onUpdate: handleSave,
+    // onUpdate: handleSave,
 
     immediatelyRender: false,
   });
@@ -67,10 +73,10 @@ function Editor() {
   useEffect(() => {
     if (!editor) return;
 
-    if (openNote?.id && openNote?.content) editor.commands.setContent(openNote.content, { emitUpdate: false });
+    if (note?.id && note?.content) editor.commands.setContent(note.content, { emitUpdate: false });
     else editor.commands.clearContent(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openNote?.id, editor]); // Disabled ESLint rule to avoid editor setContent on every update.
+  }, [note?.id, editor]); // Disabled ESLint rule to avoid editor setContent on every update.
 
   if (!editor) return null;
 
