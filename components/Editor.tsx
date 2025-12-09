@@ -15,14 +15,30 @@ import StarterKit from "@tiptap/starter-kit";
 import { FloatingMenu } from "@/components/FloatingMenu";
 import { useNote } from "@/hooks/useNote";
 import { updateNote } from "@/actions/notes/updateNote";
+import { debounce } from "@/lib/utils/debounce";
+import { DEBOUNCE_SAVE_TIME } from "@/lib/utils/constants";
+import { useSetSavingStatus } from "@/stores/openNoteStore";
 
 function Editor() {
   const note = useNote();
+  const setSavingStatus = useSetSavingStatus();
 
-  function handleUpdate() {
-    if (!note || !editor) return;
-    updateNote(note.id, editor.getJSON());
+  function handleSave() {
+    setSavingStatus(true);
+    debounceSave();
   }
+
+  const debounceSave = debounce(() => {
+    if (!editor) return;
+    const content = editor.getJSON();
+
+    if (note) updateNote(note.id, content);
+    else {
+      // Create a new Note.
+    }
+
+    setSavingStatus(false);
+  }, DEBOUNCE_SAVE_TIME);
 
   // const addNote = useAddNote();
   // const updateNote = useUpdateNote();
@@ -67,7 +83,7 @@ function Editor() {
       },
     },
 
-    onUpdate: handleUpdate,
+    onUpdate: handleSave,
 
     immediatelyRender: false,
   });

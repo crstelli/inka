@@ -4,9 +4,10 @@ import { useIsSaving } from "@/stores/notesStore";
 
 import { Spinner } from "@/components/Spinner";
 import { Breadcrumb as BreadcrumbComp, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "./ui/breadcrumb";
+import { useSavingStatus } from "@/stores/openNoteStore";
 
 function Breadcrumb() {
-  const isSaving = useIsSaving();
+  const savingStatus = useSavingStatus();
 
   return (
     <div className="flex items-center justify-between px-4 [grid-area:breadcrumb]">
@@ -17,7 +18,7 @@ function Breadcrumb() {
           <BreadcrumbItem>Welcome to Inka</BreadcrumbItem>
         </BreadcrumbList>
       </BreadcrumbComp>
-      {isSaving && (
+      {savingStatus && (
         <span className="text-secondary flex items-center gap-2">
           <Spinner size="size-4" />
           Autosaving

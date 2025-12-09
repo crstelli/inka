@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import type { Note } from "@/lib/types/Note";
 import { useOpenNote } from "@/stores/openNoteStore";
+
+import type { Note } from "@/lib/types/Note";
 
 export function useNote() {
   const openNote = useOpenNote();
