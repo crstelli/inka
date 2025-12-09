@@ -14,11 +14,13 @@ function EditorSection() {
 
   useEffect(() => {
     async function fetchNote() {
-      const note = await getNote(openNote);
-      setNote(note);
+      const res = await fetch(`api/notes/${openNote}`);
+      const data = await res.json();
+
+      setNote(data);
     }
 
-    fetchNote();
+    if (openNote) fetchNote();
   }, [openNote]);
 
   return (
