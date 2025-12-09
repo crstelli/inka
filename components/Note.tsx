@@ -42,17 +42,9 @@ function Note({ note }: Props) {
   // const trashNote = useTrashNote();
   // const updateNote = useUpdateNote();
 
-  // const openNoteId = useOpenNoteId();
-  // const setOpenNote = useSetOpenNote();
-  // const clearOpenNote = useClearOpenNote();
-
   // function handleTrashNote() {
   //   clearOpenNote();
   //   trashNote(note.id);
-  // }
-
-  // function handleUpdateNote({ title, description }: EditParams) {
-  //   updateNote({ id: note.id, title, description });
   // }
 
   return (
