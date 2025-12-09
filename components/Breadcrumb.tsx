@@ -1,7 +1,5 @@
 "use client";
 
-import { useIsSaving } from "@/stores/notesStore";
-
 import { Spinner } from "@/components/Spinner";
 import { Breadcrumb as BreadcrumbComp, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "./ui/breadcrumb";
 import { useSavingStatus } from "@/stores/openNoteStore";

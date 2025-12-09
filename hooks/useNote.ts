@@ -9,13 +9,16 @@ export function useNote() {
 
   useEffect(() => {
     async function fetchNote() {
-      const res = await fetch(`api/notes/${openNote}`);
-      const data = await res.json();
+      let note = null;
+      if (openNote) {
+        const res = await fetch(`api/notes/${openNote}`);
+        note = await res.json();
+      }
 
-      setNote(data);
+      setNote(note);
     }
 
-    if (openNote) fetchNote();
+    fetchNote();
   }, [openNote, setNote]);
 
   return note;
