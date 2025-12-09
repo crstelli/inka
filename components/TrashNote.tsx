@@ -29,7 +29,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Note } from "@/lib/types/noteType";
+import type { Note } from "@/lib/types/Note";
 import { useDeleteNote, useRestoreNote } from "@/stores/notesStore";
 import { EllipsisVertical, RotateCcw, Trash } from "lucide-react";
 import { useState } from "react";

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 import type { JSONContent } from "@tiptap/react";
-import type { Note } from "@/lib/types/noteType";
+import type { Note } from "@/lib/types/Note";
 import { debounce } from "@/lib/utils/debounce";
 
 interface UpdateOpenNoteParams {

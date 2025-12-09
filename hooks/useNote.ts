@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Note } from "@/lib/types/noteType";
+import type { Note } from "@/lib/types/Note";
 import { useOpenNote } from "@/stores/openNoteStore";
 
 export function useNote() {

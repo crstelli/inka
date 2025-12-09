@@ -14,9 +14,15 @@ import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "@/components/FloatingMenu";
 import { useNote } from "@/hooks/useNote";
+import { updateNote } from "@/actions/notes/updateNote";
 
 function Editor() {
   const note = useNote();
+
+  function handleUpdate() {
+    if (!note || !editor) return;
+    updateNote(note.id, editor.getJSON());
+  }
 
   // const addNote = useAddNote();
   // const updateNote = useUpdateNote();
@@ -61,7 +67,7 @@ function Editor() {
       },
     },
 
-    // onUpdate: handleSave,
+    onUpdate: handleUpdate,
 
     immediatelyRender: false,
   });
@@ -70,7 +76,7 @@ function Editor() {
   useEffect(() => {
     if (!editor) return;
 
-    if (note?.id && note?.content) editor.commands.setContent(note.content, { emitUpdate: false });
+    if (note?.id && note?.content) editor.commands.setContent(JSON.parse(note.content), { emitUpdate: false });
     else editor.commands.clearContent(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [note?.id, editor]); // Disabled ESLint rule to avoid editor setContent on every update.
