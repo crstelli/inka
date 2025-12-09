@@ -64,27 +64,27 @@ function Note({ note }: Props) {
                   <EllipsisVertical />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>{note.title}</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <DropdownMenuItem asChild>
-                    <DialogTrigger className="w-full">
-                      <Edit />
-                      Edit
-                    </DialogTrigger>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild variant="destructive">
-                    <AlertDialogTrigger className="w-full">
-                      <Trash />
-                      Delete
-                    </AlertDialogTrigger>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
             </div>
             <span className="text-muted-foreground">{note.description || null}</span>
           </div>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>{note.title}</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem asChild>
+                <DialogTrigger className="w-full">
+                  <Edit />
+                  Edit
+                </DialogTrigger>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild variant="destructive">
+                <AlertDialogTrigger className="w-full">
+                  <Trash />
+                  Delete
+                </AlertDialogTrigger>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Edit note</DialogTitle>
