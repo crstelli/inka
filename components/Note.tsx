@@ -36,7 +36,7 @@ import { Label } from "@/components/ui/label";
 // import type { Note as NoteType } from "@/lib/types/noteType";
 // import { useClearOpenNote, useTrashNote, useOpenNoteId, useUpdateNote } from "@/stores/notesStore";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
-import { useSetOpenNote, useOpenNote } from "@/stores/openNoteStore";
+import { useSetOpenNote, useOpenNote, useClearOpenNote } from "@/stores/openNoteStore";
 import type { NoteInfo } from "@/lib/types/NoteInfo";
 import { useState } from "react";
 import { updateNote } from "@/actions/notes/updateNote";
@@ -48,8 +48,9 @@ interface Props {
 function Note({ note }: Props) {
   const openNote = useOpenNote();
   const setOpenNote = useSetOpenNote();
+  const clearOpenNote = useClearOpenNote();
 
-  const handleOpenNote = () => (isOpen ? setOpenNote("") : setOpenNote(note.id));
+  const handleOpenNote = () => (isOpen ? clearOpenNote() : setOpenNote(note.id));
   const isOpen = openNote === note.id;
 
   const [title, setTitle] = useState(note.title);
