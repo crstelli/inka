@@ -35,10 +35,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 // import type { Note as NoteType } from "@/lib/types/noteType";
 // import { useClearOpenNote, useTrashNote, useOpenNoteId, useUpdateNote } from "@/stores/notesStore";
-import { useOpenNote } from "@/stores/openNoteStore";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
-import { useSetOpenNote } from "@/stores/openNoteStore";
+import { useSetOpenNote, useOpenNote } from "@/stores/openNoteStore";
 import type { NoteInfo } from "@/lib/types/NoteInfo";
+import { useState } from "react";
+import { updateNote } from "@/actions/notes/updateNote";
 
 interface Props {
   note: NoteInfo;
@@ -55,6 +56,16 @@ function Note({ note }: Props) {
 
   const handleOpenNote = () => (isOpen ? setOpenNote("") : setOpenNote(note.id));
   const isOpen = openNote === note.id;
+
+  const [title, setTitle] = useState(note.title);
+  const [description, setDescription] = useState(note.description);
+
+  function handleSubmit() {
+    updateNote({ noteId: note.id, title, description });
+
+    setTitle("");
+    setDescription("");
+  }
   // const trashNote = useTrashNote();
   // const updateNote = useUpdateNote();
 
@@ -116,16 +127,21 @@ function Note({ note }: Props) {
               <div className="grid gap-4">
                 <div className="grid gap-3">
                   <Label htmlFor="note-title">Title</Label>
-                  <Input id="note-title" name="noteTitle" value={note.title} />
+                  <Input id="note-title" name="noteTitle" value={title} onChange={(e) => setTitle(e.target.value)} />
                 </div>
                 <div className="grid gap-3">
                   <Label htmlFor="note-description">Description</Label>
-                  <Input id="note-description" name="noteDescription" value={note.description || ""} />
+                  <Input
+                    id="note-description"
+                    name="noteDescription"
+                    value={description || ""}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
                 </div>
               </div>
               <DialogFooter>
                 <DialogClose asChild>
-                  <Button>Done</Button>
+                  <Button onClick={handleSubmit}>Done</Button>
                 </DialogClose>
               </DialogFooter>
             </DialogContent>
