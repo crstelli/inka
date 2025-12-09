@@ -2,9 +2,9 @@
 
 import { useEffect } from "react";
 
-import { useAddNote, useOpenNote, useSetOpenNote, useSetSavingStatus, useUpdateNote } from "@/stores/notesStore";
-import { debounce } from "@/lib/utils/debounce";
-import { createNote } from "@/lib/utils/createNote";
+// import { useAddNote, useSetOpenNote, useSetSavingStatus, useUpdateNote } from "@/stores/notesStore";
+// import { debounce } from "@/lib/utils/debounce";
+// import { createNote } from "@/lib/utils/createNote";
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
@@ -13,18 +13,15 @@ import { ListKit, TaskList } from "@tiptap/extension-list";
 import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "@/components/FloatingMenu";
+import { useNote } from "@/hooks/useNote";
 
-import type { Note } from "@/lib/types/noteType";
+function Editor() {
+  const note = useNote();
 
-interface Props {
-  note: Note | null;
-}
-
-function Editor({ note }: Props) {
-  const addNote = useAddNote();
-  const updateNote = useUpdateNote();
-  const setOpenNote = useSetOpenNote();
-  const setSavingStatus = useSetSavingStatus();
+  // const addNote = useAddNote();
+  // const updateNote = useUpdateNote();
+  // const setOpenNote = useSetOpenNote();
+  // const setSavingStatus = useSetSavingStatus();
 
   // const openNote = useOpenNote();
 
