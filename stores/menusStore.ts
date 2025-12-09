@@ -1,14 +1,14 @@
 import { create } from "zustand";
 
 interface StoreType {
-  globalSidebar: boolean;
-  toggleGlobalSidebar: () => void;
+  sidebar: boolean;
+  toggleSidebar: () => void;
 }
 
 const useMenusStore = create<StoreType>((set) => ({
-  globalSidebar: true,
-  toggleGlobalSidebar: () => set((state) => ({ globalSidebar: !state.globalSidebar })),
+  sidebar: true,
+  toggleSidebar: () => set((state) => ({ sidebar: !state.sidebar })),
 }));
 
-export const useGlobalSidebar = () => useMenusStore((state) => state.globalSidebar);
-export const useToggleGlobalSidebar = () => useMenusStore((state) => state.toggleGlobalSidebar);
+export const useSidebar = () => useMenusStore((state) => state.sidebar);
+export const useToggleSidebar = () => useMenusStore((state) => state.toggleSidebar);

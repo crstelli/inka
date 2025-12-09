@@ -1,6 +1,6 @@
 "use client";
 
-import { useToggleGlobalSidebar } from "@/stores/menusStore";
+import { useToggleSidebar } from "@/stores/menusStore";
 
 import { Button } from "@/components/ui/button";
 import { Menu, SquarePen } from "lucide-react";
@@ -11,7 +11,7 @@ interface Props {
 }
 
 function NotesHeading({ count }: Props) {
-  const toggleSidebar = useToggleGlobalSidebar();
+  const toggleSidebar = useToggleSidebar();
   const setOpenNote = useSetOpenNote();
 
   return (
