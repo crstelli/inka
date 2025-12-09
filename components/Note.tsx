@@ -45,11 +45,6 @@ interface Props {
   note: NoteInfo;
 }
 
-// interface EditParams {
-//   title?: string;
-//   description?: string;
-// }
-
 function Note({ note }: Props) {
   const openNote = useOpenNote();
   const setOpenNote = useSetOpenNote();
