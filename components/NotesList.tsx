@@ -2,7 +2,7 @@
 
 import { NOTES_PAGE_SIZE } from "@/lib/utils/constants";
 
-import { usePage, useSearch, useSetMaxPage } from "@/stores/searchStore";
+import { usePage, useSearch, useSetMaxPage } from "@/stores/filterStore";
 
 import { Note } from "@/components/Note";
 import { NotePlaceholder } from "@/components/NotePlaceholder";

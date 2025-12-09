@@ -8,7 +8,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useMaxPage, useMinPage, usePage, usePageNext, usePagePrev } from "@/stores/searchStore";
+import { useMaxPage, useMinPage, usePage, usePageNext, usePagePrev } from "@/stores/filterStore";
 
 function Pagination() {
   const page = usePage();

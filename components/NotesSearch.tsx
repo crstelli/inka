@@ -1,15 +1,15 @@
 "use client";
 
 import type { ChangeEvent } from "react";
-import { useResetPage, useSearch, useSetSearch } from "@/stores/searchStore";
+import { useResetPage, useSearch, useSetSearch } from "@/stores/filterStore";
 
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 
 function NotesSearch() {
   const search = useSearch();
-
   const setSearch = useSetSearch();
+
   const resetPage = useResetPage();
 
   function handleSearch(e: ChangeEvent<HTMLInputElement>) {
@@ -24,7 +24,7 @@ function NotesSearch() {
         value={search}
         onChange={handleSearch}
         name="Note Search Bar"
-        className="border-none dark:bg-accend"
+        className="border-none dark:bg-accent"
         placeholder="Search all notes and tags"
       />
     </div>
