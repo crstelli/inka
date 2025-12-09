@@ -1,45 +1,23 @@
 "use client";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-// import type { Note as NoteType } from "@/lib/types/noteType";
-// import { useClearOpenNote, useTrashNote, useOpenNoteId, useUpdateNote } from "@/stores/notesStore";
-import { Edit, EllipsisVertical, Trash } from "lucide-react";
+// prettier-ignore
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+// prettier-ignore
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+// prettier-ignore
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+
+import Form from "next/form";
+
 import { useSetOpenNote, useOpenNote, useClearOpenNote } from "@/stores/openNoteStore";
-import type { NoteInfo } from "@/lib/types/NoteInfo";
-import { useState } from "react";
 import { updateNote } from "@/actions/notes/updateNote";
+import type { NoteInfo } from "@/lib/types/NoteInfo";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+
+import { Edit, EllipsisVertical, Trash } from "lucide-react";
 
 interface Props {
   note: NoteInfo;
@@ -50,17 +28,16 @@ function Note({ note }: Props) {
   const setOpenNote = useSetOpenNote();
   const clearOpenNote = useClearOpenNote();
 
-  const handleOpenNote = () => (isOpen ? clearOpenNote() : setOpenNote(note.id));
   const isOpen = openNote === note.id;
+  const handleClick = () => (isOpen ? clearOpenNote() : setOpenNote(note.id));
 
-  const [title, setTitle] = useState(note.title);
-  const [description, setDescription] = useState(note.description);
+  function handleSubmit(data: FormData) {
+    const title = data.get("title") as string;
+    const description = data.get("description") as string;
 
-  function handleSubmit() {
+    if (!title) return;
+
     updateNote({ noteId: note.id, title, description });
-
-    setTitle("");
-    setDescription("");
   }
   // const trashNote = useTrashNote();
   // const updateNote = useUpdateNote();
@@ -83,7 +60,7 @@ function Note({ note }: Props) {
       <Dialog>
         <DropdownMenu>
           <div
-            onClick={handleOpenNote}
+            onClick={handleClick}
             className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
               isOpen ? "bg-background" : "bg-accent border-transparent"
             }`}
@@ -115,33 +92,28 @@ function Note({ note }: Props) {
               </DropdownMenuContent>
             </div>
             <span className="text-muted-foreground">{note.description || null}</span>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Edit note</DialogTitle>
-                <DialogDescription>Make some changes here, click save when you&apos;re done.</DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4">
-                <div className="grid gap-3">
-                  <Label htmlFor="note-title">Title</Label>
-                  <Input id="note-title" name="noteTitle" value={title} onChange={(e) => setTitle(e.target.value)} />
-                </div>
-                <div className="grid gap-3">
-                  <Label htmlFor="note-description">Description</Label>
-                  <Input
-                    id="note-description"
-                    name="noteDescription"
-                    value={description || ""}
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                </div>
+          </div>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit note</DialogTitle>
+              <DialogDescription>Make some changes here, click save when you&apos;re done.</DialogDescription>
+            </DialogHeader>
+            <Form className="grid gap-4" action={handleSubmit}>
+              <div className="grid gap-3">
+                <Label htmlFor="note-title">Title</Label>
+                <Input id="note-title" name="title" defaultValue={note.title} />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="note-description">Description</Label>
+                <Input id="note-description" name="description" defaultValue={note.description || ""} />
               </div>
               <DialogFooter>
                 <DialogClose asChild>
-                  <Button onClick={handleSubmit}>Done</Button>
+                  <Button type="submit">Done</Button>
                 </DialogClose>
               </DialogFooter>
-            </DialogContent>
-          </div>
+            </Form>
+          </DialogContent>
         </DropdownMenu>
       </Dialog>
       <AlertDialogContent>
