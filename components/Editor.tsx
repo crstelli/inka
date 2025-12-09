@@ -17,24 +17,27 @@ import { useNote } from "@/hooks/useNote";
 import { updateNote } from "@/actions/notes/updateNote";
 import { debounce } from "@/lib/utils/debounce";
 import { DEBOUNCE_SAVE_TIME } from "@/lib/utils/constants";
-import { useSetSavingStatus } from "@/stores/openNoteStore";
+import { useSetOpenNote, useSetSavingStatus } from "@/stores/openNoteStore";
+import { createNote } from "@/actions/notes/createNote";
 
 function Editor() {
   const note = useNote();
   const setSavingStatus = useSetSavingStatus();
+  const setOpenNote = useSetOpenNote();
 
   function handleSave() {
     setSavingStatus(true);
     debounceSave();
   }
 
-  const debounceSave = debounce(() => {
+  const debounceSave = debounce(async () => {
     if (!editor) return;
     const content = editor.getJSON();
 
     if (note) updateNote(note.id, content);
     else {
-      // Create a new Note.
+      const newNote = createNote(content);
+      setOpenNote((await newNote).id);
     }
 
     setSavingStatus(false);
