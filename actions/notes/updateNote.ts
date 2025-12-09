@@ -4,10 +4,25 @@ import prisma from "@/lib/prisma/prisma";
 import { getUser } from "@/lib/auth";
 
 import type { JSONContent } from "@tiptap/react";
+import { revalidatePath } from "next/cache";
 
-async function updateNote(noteId: string, content: JSONContent) {
+interface Params {
+  noteId: string;
+  content?: JSONContent;
+  title?: string;
+}
+
+async function updateNote({ noteId, content, title }: Params) {
   const user = await getUser();
-  await prisma.note.update({ where: { id: noteId, user_id: user.id }, data: { content: JSON.stringify(content) } });
+
+  const data: Record<string, string> = {};
+
+  if (content) data.content = JSON.stringify(content);
+  if (title) data.title = title;
+
+  await prisma.note.update({ where: { id: noteId, user_id: user.id }, data });
+
+  revalidatePath("/");
 }
 
 export { updateNote };

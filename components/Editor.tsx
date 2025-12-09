@@ -2,10 +2,6 @@
 
 import { useEffect } from "react";
 
-// import { useAddNote, useSetOpenNote, useSetSavingStatus, useUpdateNote } from "@/stores/notesStore";
-// import { debounce } from "@/lib/utils/debounce";
-// import { createNote } from "@/lib/utils/createNote";
-
 import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
 import { ListKit, TaskList } from "@tiptap/extension-list";
@@ -13,15 +9,18 @@ import { ListKit, TaskList } from "@tiptap/extension-list";
 import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "@/components/FloatingMenu";
-import { useNote } from "@/hooks/useNote";
 import { updateNote } from "@/actions/notes/updateNote";
 import { debounce } from "@/lib/utils/debounce";
 import { DEBOUNCE_SAVE_TIME } from "@/lib/utils/constants";
 import { useSetOpenNote, useSetSavingStatus } from "@/stores/openNoteStore";
 import { createNote } from "@/actions/notes/createNote";
+import type { Note } from "@/lib/types/Note";
 
-function Editor() {
-  const note = useNote();
+interface Props {
+  note: Note | null;
+}
+
+function Editor({ note }: Props) {
   const setSavingStatus = useSetSavingStatus();
   const setOpenNote = useSetOpenNote();
 
@@ -34,7 +33,7 @@ function Editor() {
     if (!editor) return;
     const content = editor.getJSON();
 
-    if (note) updateNote(note.id, content);
+    if (note) updateNote({ noteId: note.id, content });
     else {
       const newNote = createNote(content);
       setOpenNote((await newNote).id);
@@ -42,34 +41,6 @@ function Editor() {
 
     setSavingStatus(false);
   }, DEBOUNCE_SAVE_TIME);
-
-  // const addNote = useAddNote();
-  // const updateNote = useUpdateNote();
-  // const setOpenNote = useSetOpenNote();
-  // const setSavingStatus = useSetSavingStatus();
-
-  // const openNote = useOpenNote();
-
-  // const debounceSave = debounce(function () {
-  //   if (!editor) return;
-  //   const content = editor.getJSON();
-
-  //   if (openNote) {
-  //     updateNote({ id: openNote.id, content });
-  //   } else {
-  //     const newNote = createNote({ content });
-
-  //     addNote(newNote);
-  //     setOpenNote(newNote.id);
-  //   }
-
-  //   setSavingStatus(false);
-  // }, 500);
-
-  // function handleSave() {
-  //   setSavingStatus(true);
-  //   debounceSave();
-  // }
 
   const editor = useEditor({
     extensions: [
