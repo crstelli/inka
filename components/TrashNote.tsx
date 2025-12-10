@@ -1,5 +1,7 @@
 "use client";
 
+import { deleteNote } from "@/actions/notes/deleteNote";
+import { setNoteTrash } from "@/actions/notes/setNoteTrash";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,7 +32,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { NoteInfo } from "@/lib/types/NoteInfo";
-import { useDeleteNote, useRestoreNote } from "@/stores/notesStore";
 import { EllipsisVertical, RotateCcw, Trash } from "lucide-react";
 import { useState } from "react";
 
@@ -41,17 +42,14 @@ interface Props {
 function TrashNote({ note }: Props) {
   const [openDialog, setOpenDialog] = useState<null | "delete" | "restore">(null);
 
-  const restoreNote = useRestoreNote();
-  const deleteNote = useDeleteNote();
-
   function handleDelete() {
-    // deleteNote(note.id);
-    // setOpenDialog(null);
+    deleteNote(note.id);
+    setOpenDialog(null);
   }
 
   function handleRestore() {
-    // restoreNote(note);
-    // setOpenDialog(null);
+    setNoteTrash(note.id, false);
+    setOpenDialog(null);
   }
 
   return (
