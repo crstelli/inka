@@ -2,10 +2,6 @@
 
 import { useEffect } from "react";
 
-import { useAddNote, useOpenNote, useSetOpenNote, useSetSavingStatus, useUpdateNote } from "@/stores/notesStore";
-import { debounce } from "@/lib/utils/debounce";
-import { createNote } from "@/lib/utils/createNote";
-
 import { useEditor, EditorContent } from "@tiptap/react";
 import { Placeholder } from "@tiptap/extensions";
 import { ListKit, TaskList } from "@tiptap/extension-list";
@@ -13,35 +9,38 @@ import { ListKit, TaskList } from "@tiptap/extension-list";
 import StarterKit from "@tiptap/starter-kit";
 
 import { FloatingMenu } from "@/components/FloatingMenu";
+import { updateNote } from "@/actions/notes/updateNote";
+import { debounce } from "@/lib/utils/debounce";
+import { DEBOUNCE_SAVE_TIME } from "@/lib/utils/constants";
+import { useSetOpenNote, useSetSavingStatus } from "@/stores/openNoteStore";
+import { createNote } from "@/actions/notes/createNote";
+import type { Note } from "@/lib/types/Note";
 
-function Editor() {
-  const addNote = useAddNote();
-  const updateNote = useUpdateNote();
-  const setOpenNote = useSetOpenNote();
+interface Props {
+  note: Note | null;
+}
+
+function Editor({ note }: Props) {
   const setSavingStatus = useSetSavingStatus();
-
-  const openNote = useOpenNote();
-
-  const debounceSave = debounce(function () {
-    if (!editor) return;
-    const content = editor.getJSON();
-
-    if (openNote) {
-      updateNote({ id: openNote.id, content });
-    } else {
-      const newNote = createNote({ content });
-
-      addNote(newNote);
-      setOpenNote(newNote.id);
-    }
-
-    setSavingStatus(false);
-  }, 500);
+  const setOpenNote = useSetOpenNote();
 
   function handleSave() {
     setSavingStatus(true);
     debounceSave();
   }
+
+  const debounceSave = debounce(async () => {
+    if (!editor) return;
+    const content = editor.getJSON();
+
+    if (note) updateNote({ noteId: note.id, content });
+    else {
+      const newNote = createNote(content);
+      setOpenNote((await newNote).id);
+    }
+
+    setSavingStatus(false);
+  }, DEBOUNCE_SAVE_TIME);
 
   const editor = useEditor({
     extensions: [
@@ -67,10 +66,10 @@ function Editor() {
   useEffect(() => {
     if (!editor) return;
 
-    if (openNote?.id && openNote?.content) editor.commands.setContent(openNote.content, { emitUpdate: false });
+    if (note?.id && note?.content) editor.commands.setContent(JSON.parse(note.content), { emitUpdate: false });
     else editor.commands.clearContent(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openNote?.id, editor]); // Disabled ESLint rule to avoid editor setContent on every update.
+  }, [note?.id, editor]); // Disabled ESLint rule to avoid editor setContent on every update.
 
   if (!editor) return null;
 

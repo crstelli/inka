@@ -1,13 +1,17 @@
 "use client";
 
-import { useToggleGlobalSidebar } from "@/stores/menusStore";
+import { useToggleSidebar } from "@/stores/menusStore";
+import { useClearOpenNote } from "@/stores/openNoteStore";
 
 import { Button } from "@/components/ui/button";
 import { Menu, SquarePen } from "lucide-react";
-import { useClearOpenNote } from "@/stores/notesStore";
 
-function NotesHeading() {
-  const toggleSidebar = useToggleGlobalSidebar();
+interface Props {
+  count: number;
+}
+
+function NotesHeading({ count }: Props) {
+  const toggleSidebar = useToggleSidebar();
   const clearOpenNote = useClearOpenNote();
 
   return (
@@ -15,7 +19,7 @@ function NotesHeading() {
       <Button onClick={toggleSidebar} size="icon" variant="secondary">
         <Menu />
       </Button>
-      <span className="font-semibold">All Notes</span>
+      <span className="font-semibold">All Notes ({count})</span>
       <Button onClick={clearOpenNote} size="icon" variant="secondary">
         <SquarePen />
       </Button>

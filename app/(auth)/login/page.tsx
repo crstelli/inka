@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { signInWithGoogle } from "@/actions/signinWithGoogle";
+import { signinWithGoogle } from "@/actions/auth/signinWithGoogle";
 
 import { Button } from "@/components/ui/button";
 import { Field, FieldSet } from "@/components/ui/field";
@@ -61,7 +61,7 @@ export default async function page() {
             </Link>
           </span>
         </form>
-        <form className="mx-auto mt-4" action={signInWithGoogle}>
+        <form className="mx-auto mt-4" action={signinWithGoogle}>
           <Button type="submit">Login with Google</Button>
         </form>
       </div>

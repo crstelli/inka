@@ -1,58 +1,24 @@
 "use client";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import type { Note } from "@/lib/types/noteType";
-import { useDeleteNote, useRestoreNote } from "@/stores/notesStore";
-import { EllipsisVertical, RotateCcw, Trash } from "lucide-react";
+// prettier-ignore
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+
 import { useState } from "react";
+import type { NoteInfo } from "@/lib/types/NoteInfo";
+
+import { NoteDeleteDialog } from "@/components/NoteDeleteDialog";
+import { NoteRestoreDialog } from "@/components/NoteRestoreDialog";
+import { Button } from "@/components/ui/button";
+
+import { EllipsisVertical, RotateCcw, Trash } from "lucide-react";
 
 interface Props {
-  note: Note;
+  note: NoteInfo;
 }
 
 function TrashNote({ note }: Props) {
   const [openDialog, setOpenDialog] = useState<null | "delete" | "restore">(null);
-
-  const restoreNote = useRestoreNote();
-  const deleteNote = useDeleteNote();
-
-  function handleDelete() {
-    deleteNote(note.id);
-    setOpenDialog(null);
-  }
-
-  function handleRestore() {
-    restoreNote(note);
-    setOpenDialog(null);
-  }
+  const closeDialog = () => setOpenDialog(null);
 
   return (
     <>
@@ -83,39 +49,8 @@ function TrashNote({ note }: Props) {
           <span className="text-muted-foreground">{note.description || "No description provided"}</span>
         </div>
       </DropdownMenu>
-      <Dialog open={openDialog === "restore"}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Restore note</DialogTitle>
-            <DialogDescription>Restore your note and add it back to all notes.</DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose asChild onClick={() => setOpenDialog(null)}>
-              <Button variant={"secondary"}>Cancel</Button>
-            </DialogClose>
-            <DialogClose asChild onClick={() => handleRestore()}>
-              <Button>Restore</Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <AlertDialog open={openDialog === "delete"}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Delete Note</AlertDialogTitle>
-            <AlertDialogDescription>Do you want to permanently delete this note?</AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel asChild onClick={() => setOpenDialog(null)}>
-              <Button variant="secondary">Cancel</Button>
-            </AlertDialogCancel>
-            <AlertDialogAction asChild onClick={() => handleDelete()}>
-              <Button variant="destructive">Delete</Button>
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      {openDialog === "restore" && <NoteRestoreDialog closeDialog={closeDialog} id={note.id} />}
+      {openDialog === "delete" && <NoteDeleteDialog closeDialog={closeDialog} id={note.id} />}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import type { JSONContent } from "@tiptap/react";
 
 import { DEFAULT_NOTE_NAME } from "@/lib/utils/constants";
-import { Note } from "@/lib/types/noteType";
+import { Note } from "@/lib/types/Note";
 
 interface Parameters {
   title?: string;

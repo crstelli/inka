@@ -1,10 +1,8 @@
-"use client";
-
 import { TrashNote } from "@/components/TrashNote";
-import { useTrashNotes } from "@/stores/notesStore";
+import { getNotes } from "@/lib/getNotes";
 
-function TrashNotesList() {
-  const trashNotes = useTrashNotes();
+async function TrashNotesList() {
+  const trashNotes = await getNotes({ trash: true });
 
   return (
     <div className="mt-20 flex gap-4 flex-col w-full max-w-[500px]">

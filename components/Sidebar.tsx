@@ -1,16 +1,16 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { signout } from "@/actions/signout";
+import { signout } from "@/actions/auth/signout";
 
 import { LogOut, Settings, StickyNote, Trash } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { useGlobalSidebar } from "@/stores/menusStore";
+import { useSidebar } from "@/stores/menusStore";
 
 function Sidebar() {
-  const isOpen = useGlobalSidebar();
+  const isOpen = useSidebar();
 
   return (
     <div className={`grid grid-rows-[50px_1fr] divide-y divide-border" ${isOpen ? "w-60" : null}`}>
