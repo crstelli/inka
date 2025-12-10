@@ -1,15 +1,7 @@
 // prettier-ignore
-import { trashNote } from "@/actions/notes/trashNote";
-import {
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
+import { trashNote } from "@/actions/notes/trashNote";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 
