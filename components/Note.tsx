@@ -1,16 +1,16 @@
 "use client";
 
 // prettier-ignore
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-// prettier-ignore
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 
 import { useSetOpenNote, useOpenNote, useClearOpenNote } from "@/stores/openNoteStore";
 import type { NoteInfo } from "@/lib/types/NoteInfo";
 
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { NoteEditing } from "@/components/NoteEditing";
+import { NoteDelete } from "@/components/NoteDelete";
 
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 
@@ -74,21 +74,7 @@ function Note({ note }: Props) {
         </DropdownMenu>
         <NoteEditing id={note.id} title={note.title} description={note.description} />
       </Dialog>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-          <AlertDialogDescription>Do you want to delete the note?</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction asChild>
-            <Button variant="destructive" className="text-white">
-              <Trash />
-              Delete
-            </Button>
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
+      <NoteDelete />
     </AlertDialog>
   );
 }
