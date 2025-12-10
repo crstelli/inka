@@ -29,13 +29,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Note } from "@/lib/types/Note";
+import type { NoteInfo } from "@/lib/types/NoteInfo";
 import { useDeleteNote, useRestoreNote } from "@/stores/notesStore";
 import { EllipsisVertical, RotateCcw, Trash } from "lucide-react";
 import { useState } from "react";
 
 interface Props {
-  note: Note;
+  note: NoteInfo;
 }
 
 function TrashNote({ note }: Props) {
@@ -45,13 +45,13 @@ function TrashNote({ note }: Props) {
   const deleteNote = useDeleteNote();
 
   function handleDelete() {
-    deleteNote(note.id);
-    setOpenDialog(null);
+    // deleteNote(note.id);
+    // setOpenDialog(null);
   }
 
   function handleRestore() {
-    restoreNote(note);
-    setOpenDialog(null);
+    // restoreNote(note);
+    // setOpenDialog(null);
   }
 
   return (

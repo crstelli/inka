@@ -1,12 +1,11 @@
-import { getNotesList } from "@/lib/getNotesList";
-
 import { NotesHeading } from "@/components/NotesHeading";
 import { NotesSearch } from "@/components/NotesSearch";
 import { NotesList } from "@/components/NotesList";
 import { Pagination } from "@/components/Pagination";
+import { getNotes } from "@/lib/getNotes";
 
 async function NotesMenu() {
-  const notes = await getNotesList();
+  const notes = await getNotes();
 
   return (
     <>
