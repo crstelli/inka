@@ -1,13 +1,14 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+
 import { signout } from "@/actions/auth/signout";
+import { useSidebar } from "@/stores/menusStore";
+import { Button } from "@/components/ui/button";
 
 import { LogOut, Settings, StickyNote, Trash } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { Button } from "./ui/button";
-import Link from "next/link";
-import { useSidebar } from "@/stores/menusStore";
 
 function Sidebar() {
   const isOpen = useSidebar();

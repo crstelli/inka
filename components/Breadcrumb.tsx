@@ -1,7 +1,8 @@
 "use client";
 
-import { Spinner } from "@/components/Spinner";
 import { Breadcrumb as BreadcrumbComp, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "./ui/breadcrumb";
+import { Spinner } from "@/components/Spinner";
+
 import { useSavingStatus } from "@/stores/openNoteStore";
 
 function Breadcrumb() {

@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { getUser } from "@/lib/auth";
+import { getUser } from "@/lib/auth/auth";
 import prisma from "@/lib/prisma/prisma";
 
 export async function GET(_: NextRequest, ctx: RouteContext<"/api/notes/[id]">) {

@@ -1,5 +1,5 @@
+import { getNotes } from "@/lib/prisma/getNotes";
 import { TrashNote } from "@/components/TrashNote";
-import { getNotes } from "@/lib/getNotes";
 
 async function TrashNotesList() {
   const trashNotes = await getNotes({ trash: true });

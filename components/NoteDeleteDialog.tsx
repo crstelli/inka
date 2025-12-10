@@ -10,9 +10,7 @@ interface Props {
 }
 
 function NoteDeleteDialog({ id, closeDialog }: Props) {
-  function handleDelete() {
-    deleteNote(id);
-  }
+  const handleDelete = () => deleteNote(id);
 
   return (
     <AlertDialog open>

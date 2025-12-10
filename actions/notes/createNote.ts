@@ -1,5 +1,5 @@
 "use server";
-import { getUser } from "@/actions/auth/getUser";
+import { getUser } from "@/lib/auth/auth";
 import prisma from "@/lib/prisma/prisma";
 import { DEFAULT_NOTE_NAME } from "@/lib/utils/constants";
 

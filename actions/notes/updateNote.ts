@@ -1,10 +1,10 @@
 "use server";
+import { revalidatePath } from "next/cache";
 
 import prisma from "@/lib/prisma/prisma";
-import { getUser } from "@/lib/auth";
+import { getUser } from "@/lib/auth/auth";
 
 import type { JSONContent } from "@tiptap/react";
-import { revalidatePath } from "next/cache";
 
 interface Params {
   noteId: string;

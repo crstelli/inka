@@ -1,14 +1,16 @@
+import { redirect, RedirectType } from "next/navigation";
 import Link from "next/link";
+
 import { signinWithGoogle } from "@/actions/auth/signinWithGoogle";
+import { getCurrentUser } from "@/lib/prisma/getCurrentUser";
 
 import { Button } from "@/components/ui/button";
 import { Field, FieldSet } from "@/components/ui/field";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 
 import { KeyRound, Mail } from "lucide-react";
-import { getCurrentUser } from "@/lib/getCurrentUser";
-import { redirect, RedirectType } from "next/navigation";
 
 export default async function page() {
   const user = await getCurrentUser();

@@ -9,9 +9,7 @@ interface Props {
 }
 
 function NoteRestoreDialog({ id, closeDialog }: Props) {
-  function handleRestore() {
-    setNoteTrash(id, false);
-  }
+  const handleRestore = () => setNoteTrash(id, false);
 
   return (
     <Dialog open>

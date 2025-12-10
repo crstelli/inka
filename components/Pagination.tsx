@@ -1,26 +1,11 @@
 "use client";
 
-import {
-  Pagination as PaginationComp,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { useMaxPage, useMinPage, usePage, usePageNext, usePagePrev } from "@/stores/filterStore";
+// prettier-ignore
+import { Pagination as PaginationComp, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { usePagination } from "@/hooks/usePagination";
 
 function Pagination() {
-  const page = usePage();
-
-  const minPage = useMinPage();
-  const maxPage = useMaxPage();
-
-  const nextPage = usePageNext();
-  const prevPage = usePagePrev();
-
-  const canUndo = page > minPage;
-  const canNext = page < maxPage;
+  const { page, nextPage, prevPage, canUndo, canNext } = usePagination();
 
   return (
     <PaginationComp className="[grid-area:pagination]">

@@ -35,8 +35,8 @@ function Editor({ note }: Props) {
 
     if (note) updateNote({ noteId: note.id, content });
     else {
-      const newNote = createNote(content);
-      setOpenNote((await newNote).id);
+      const newNote = await createNote(content);
+      setOpenNote(newNote.id);
     }
 
     setSavingStatus(false);

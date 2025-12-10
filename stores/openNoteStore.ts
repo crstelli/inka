@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface SearchState {
+interface StoreType {
   openNote: string;
   savingStatus: boolean;
 
@@ -9,7 +9,7 @@ interface SearchState {
   clearOpenNote: () => void;
 }
 
-const openNoteStore = create<SearchState>((set) => ({
+const openNoteStore = create<StoreType>((set) => ({
   openNote: "",
   savingStatus: false,
 

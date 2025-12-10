@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma/prisma";
 
-import { getUser } from "@/lib/auth";
+import { getUser } from "@/lib/auth/auth";
 import type { NoteInfo } from "@/lib/types/NoteInfo";
 
 interface Params {

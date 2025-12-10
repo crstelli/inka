@@ -1,11 +1,15 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldSet } from "@/components/ui/field";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import { getCurrentUser } from "@/lib/getCurrentUser";
-import { KeyRound, Mail } from "lucide-react";
-import Link from "next/link";
 import { redirect, RedirectType } from "next/navigation";
+import Link from "next/link";
+
+import { getCurrentUser } from "@/lib/prisma/getCurrentUser";
+
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import { Button } from "@/components/ui/button";
+import { Field, FieldSet } from "@/components/ui/field";
+
+import { KeyRound, Mail } from "lucide-react";
 
 export default async function page() {
   const user = await getCurrentUser();

@@ -1,17 +1,23 @@
 import "@/app/globals.css";
 import { geist } from "@/lib/next/font";
 
-import type { ReactNode } from "react";
+import { getCurrentUser } from "@/lib/prisma/getCurrentUser";
+import { redirect, RedirectType } from "next/navigation";
+
 import { Sidebar } from "@/components/Sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
+import type { ReactNode } from "react";
 export { metadata } from "@/lib/next/metadata";
 
 interface Props {
   children: ReactNode;
 }
 
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
+  const user = await getCurrentUser();
+  if (!user) redirect("/login", RedirectType.replace);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`w-screen h-screen ${geist.className}`}>

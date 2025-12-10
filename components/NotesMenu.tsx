@@ -1,4 +1,4 @@
-import { getNotes } from "@/lib/getNotes";
+import { getNotes } from "@/lib/prisma/getNotes";
 
 import { NotesHeading } from "@/components/NotesHeading";
 import { NotesSearch } from "@/components/NotesSearch";

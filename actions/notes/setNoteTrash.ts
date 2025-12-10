@@ -1,8 +1,8 @@
 "use server";
-
-import { getUser } from "@/lib/auth";
-import prisma from "@/lib/prisma/prisma";
 import { revalidatePath } from "next/cache";
+
+import { getUser } from "@/lib/auth/auth";
+import prisma from "@/lib/prisma/prisma";
 
 export async function setNoteTrash(id: string, value: boolean) {
   const user = await getUser();
