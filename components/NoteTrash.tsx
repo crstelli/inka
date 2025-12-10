@@ -1,11 +1,26 @@
 // prettier-ignore
-import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import { trashNote } from "@/actions/notes/trashNote";
+import {
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 
-function NoteDelete() {
-  function handleDelete() {}
+interface Props {
+  id: string;
+}
+
+function NoteTrash({ id }: Props) {
+  async function handleDelete() {
+    await trashNote(id);
+  }
 
   return (
     <AlertDialogContent>
@@ -26,4 +41,4 @@ function NoteDelete() {
   );
 }
 
-export { NoteDelete };
+export { NoteTrash };

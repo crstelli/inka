@@ -10,7 +10,7 @@ import type { NoteInfo } from "@/lib/types/NoteInfo";
 
 import { Button } from "@/components/ui/button";
 import { NoteEditing } from "@/components/NoteEditing";
-import { NoteDelete } from "@/components/NoteDelete";
+import { NoteTrash } from "@/components/NoteTrash";
 
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 
@@ -25,13 +25,6 @@ function Note({ note }: Props) {
 
   const isOpen = openNote === note.id;
   const handleClick = () => (isOpen ? clearOpenNote() : setOpenNote(note.id));
-
-  // const trashNote = useTrashNote();
-
-  // function handleTrashNote() {
-  //   clearOpenNote();
-  //   trashNote(note.id);
-  // }
 
   return (
     <AlertDialog>
@@ -74,7 +67,7 @@ function Note({ note }: Props) {
         </DropdownMenu>
         <NoteEditing id={note.id} title={note.title} description={note.description} />
       </Dialog>
-      <NoteDelete />
+      <NoteTrash id={note.id} />
     </AlertDialog>
   );
 }
