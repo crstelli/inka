@@ -3,19 +3,14 @@
 // prettier-ignore
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 // prettier-ignore
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-// prettier-ignore
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-import Form from "next/form";
-
 import { useSetOpenNote, useOpenNote, useClearOpenNote } from "@/stores/openNoteStore";
-import { updateNote } from "@/actions/notes/updateNote";
 import type { NoteInfo } from "@/lib/types/NoteInfo";
 
-import { Input } from "@/components/ui/input";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { NoteEditing } from "@/components/NoteEditing";
 
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 
@@ -31,16 +26,7 @@ function Note({ note }: Props) {
   const isOpen = openNote === note.id;
   const handleClick = () => (isOpen ? clearOpenNote() : setOpenNote(note.id));
 
-  function handleSubmit(data: FormData) {
-    const title = data.get("title") as string;
-    const description = data.get("description") as string;
-
-    if (!title) return;
-
-    updateNote({ noteId: note.id, title, description });
-  }
   // const trashNote = useTrashNote();
-  // const updateNote = useUpdateNote();
 
   // function handleTrashNote() {
   //   clearOpenNote();
@@ -85,28 +71,8 @@ function Note({ note }: Props) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Edit note</DialogTitle>
-              <DialogDescription>Make some changes here, click save when you&apos;re done.</DialogDescription>
-            </DialogHeader>
-            <Form className="grid gap-4" action={handleSubmit}>
-              <div className="grid gap-3">
-                <Label htmlFor="note-title">Title</Label>
-                <Input id="note-title" name="title" defaultValue={note.title} />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="note-description">Description</Label>
-                <Input id="note-description" name="description" defaultValue={note.description || ""} />
-              </div>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button type="submit">Done</Button>
-                </DialogClose>
-              </DialogFooter>
-            </Form>
-          </DialogContent>
         </DropdownMenu>
+        <NoteEditing id={note.id} title={note.title} description={note.description} />
       </Dialog>
       <AlertDialogContent>
         <AlertDialogHeader>
