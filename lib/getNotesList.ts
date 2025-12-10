@@ -6,7 +6,7 @@ import type { NoteInfo } from "@/lib/types/NoteInfo";
 export async function getNotesList() {
   const user = await getUser();
   const notesInfo: NoteInfo[] = await prisma.note.findMany({
-    where: { user_id: user.id },
+    where: { user_id: user.id, trash: false },
     select: { id: true, title: true, description: true, updated_at: true, created_at: true },
   });
 
