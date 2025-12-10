@@ -2,6 +2,7 @@
 import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 import Form from "next/form";
+import { useFormStatus } from "react-dom";
 import { updateNote } from "@/actions/notes/updateNote";
 
 import { Button } from "@/components/ui/button";
@@ -41,11 +42,20 @@ function NoteEditing({ id, title, description = "" }: Props) {
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="submit">Done</Button>
+            <Submit />
           </DialogClose>
         </DialogFooter>
       </Form>
     </DialogContent>
+  );
+}
+
+function Submit() {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" disabled={pending}>
+      {pending ? "..." : "Done"}
+    </Button>
   );
 }
 
