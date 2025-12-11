@@ -1,10 +1,10 @@
 "use client";
 
 import { useNote } from "@/hooks/useNote";
+import dynamic from "next/dynamic";
 
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { EditorHeading } from "@/components/EditorHeading";
-import dynamic from "next/dynamic";
 import { Spinner } from "@/components/Spinner";
 
 const Editor = dynamic(() => import("@/components/Editor"), {
