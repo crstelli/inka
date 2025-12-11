@@ -13,7 +13,7 @@ function NotesList({ notes }: Props) {
   const displayNotes = useNotesView(notes);
 
   return (
-    <div className="p-4 flex flex-col gap-4 overflow-auto [grid-area:notesList]">
+    <div className="p-4 flex flex-col gap-4 overflow-auto">
       {displayNotes.map((n) => (
         <Note key={n.id} note={n} />
       ))}

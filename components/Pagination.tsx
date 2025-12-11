@@ -8,7 +8,7 @@ function Pagination() {
   const { page, nextPage, prevPage, canUndo, canNext } = usePagination();
 
   return (
-    <PaginationComp className="[grid-area:pagination]">
+    <PaginationComp>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious onClick={() => canUndo && prevPage()} />

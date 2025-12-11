@@ -182,8 +182,8 @@
 
 .layout {
   grid-template-areas:
-    "notesHeading heading"
-    "notesSearch editorHeading"
-    "notesList editor"
-    "pagination breadcrumb";
+    "notesSection heading"
+    "notesSection editorHeading"
+    "notesSection editor"
+    "notesSection breadcrumb";
 }

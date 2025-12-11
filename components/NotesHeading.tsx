@@ -15,7 +15,7 @@ function NotesHeading({ count }: Props) {
   const clearOpenNote = useClearOpenNote();
 
   return (
-    <div className="flex justify-between items-center px-4 [grid-area:notesHeading]">
+    <div className="flex justify-between items-center px-4">
       <Button onClick={toggleSidebar} size="icon" variant="secondary">
         <Menu />
       </Button>

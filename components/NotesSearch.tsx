@@ -18,7 +18,7 @@ function NotesSearch() {
   }
 
   return (
-    <div className="bg-accent flex items-center px-4 gap-4 [grid-area:notesSearch]">
+    <div className="bg-accent flex items-center px-4 gap-4">
       <SearchIcon className="text-foreground" />
       <Input
         value={search}
