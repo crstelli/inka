@@ -9,7 +9,7 @@ export default async function page() {
   const notes = await getNotes();
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] grid-rows-[50px_1fr] divide-x">
+    <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] grid-rows-[50px_1fr] divide-x">
       <NotesSection notes={notes} className="max-lg:hidden" />
       <Heading />
       <EditorSection />
