@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <a href="https://github.com/crstelli/inka">
+    <img src="images/square-logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-## Getting Started
+<h3 align="center">Inka</h3>
 
-First, run the development server:
+  <p align="center">
+    Inka is a fast, lightweight note-taking app designed for clarity and focus.
+    <br />
+    <a href=""><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="">View Demo</a>
+    &middot;
+    <a href="https://github.com/crstelli/inka/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    &middot;
+    <a href="https://github.com/crstelli/inka/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## About The Project
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[![Product Name Screen Shot][product-screenshot]](https://inka-notes.vercel.app/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Inka is a fast, lightweight note-taking app designed for clarity and focus. It lets users create, edit, and organize notes with a clean text-editor experience inspired by modern knowledge tools.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Inka offers an intuitive UI that adapts to different workflows, the goal is to provide a streamlined space to capture ideas, draft documents, and manage personal knowledge without distractions.
 
-## Learn More
+### Built With
 
-To learn more about Next.js, take a look at the following resources:
+[![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white&logoSize=60&style=for-the-badge)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB&logoSize=60&style=for-the-badge)](https://react.dev/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000?logo=shadcnui&logoColor=fff&logoSize=60&style=for-the-badge)](https://ui.shadcn.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white&logoSize=60&style=for-the-badge)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white&logoSize=60&style=for-the-badge)](https://www.prisma.io/)
+[![Postgres](https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white&logoSize=60&style=for-the-badge)](https://www.postgresql.org/)
+[![Auth.js](https://custom-icon-badges.demolab.com/badge/Auth.js-801DDA?logo=auth.js&logoColor=fff&logoSize=60&style=for-the-badge)](https://authjs.dev/)
+[![Vercel](https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white&logoSize=60&style=for-the-badge)](https://vercel.com/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Create, view, edit and delete notes.
+- Note editor in markdown with all text decorations.
+- Login with Google.
+- Dark & Light theme.
 
-## Deploy on Vercel
+### Future Improvements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Login with credentials and more providers.
+- Share notes with users.
+- Create notes inside other notes.
+- Folder structure.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Author
+
+Giuseppe Crescitelli - [GitHub](https://github.com/crstelli/) [LinkedIn](https://www.linkedin.com/in/giuseppecrescitelli/) [Portfolio](https://www.crescitelli.dev/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+[product-screenshot]: images/logo.png
