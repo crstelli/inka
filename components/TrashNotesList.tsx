@@ -5,11 +5,11 @@ async function TrashNotesList() {
   const trashNotes = await getNotes({ trash: true });
 
   return (
-    <div className="mt-20 flex gap-4 flex-col w-full max-w-[500px]">
+    <div className="mt-10 flex gap-4 flex-col">
       {trashNotes.length > 0 ? (
         trashNotes.map((n) => <TrashNote note={n} key={n.id} />)
       ) : (
-        <p className="text-center text-secondary">The trash is empty.</p>
+        <p className="text-secondary">The trash is empty.</p>
       )}
     </div>
   );

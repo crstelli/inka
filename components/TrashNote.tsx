@@ -23,7 +23,7 @@ function TrashNote({ note }: Props) {
   return (
     <>
       <DropdownMenu>
-        <div className="h-25 group rounded-md p-3 border flex flex-col cursor-pointer bg-accent border-transparent">
+        <div className="h-25 group rounded-md p-3 border flex flex-col cursor-pointer bg-accent border-transparent max-w-[400px] mx-auto w-full">
           <div className="flex items-center justify-between">
             <h3 className="font-medium">{note.title}</h3>
             <DropdownMenuTrigger asChild>
@@ -46,7 +46,7 @@ function TrashNote({ note }: Props) {
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </div>
-          <span className="text-muted-foreground">{note.description || "No description provided"}</span>
+          <span className="text-muted-foreground text-left">{note.description || "No description provided"}</span>
         </div>
       </DropdownMenu>
       {openDialog === "restore" && <NoteRestoreDialog closeDialog={closeDialog} id={note.id} />}
