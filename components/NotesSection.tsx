@@ -5,7 +5,7 @@ import { NotesSearch } from "@/components/NotesSearch";
 import { NotesList } from "@/components/NotesList";
 import { Pagination } from "@/components/Pagination";
 
-async function NotesMenu() {
+async function NotesSection() {
   const notes = await getNotes();
 
   return (
@@ -18,4 +18,4 @@ async function NotesMenu() {
   );
 }
 
-export { NotesMenu };
+export { NotesSection };
