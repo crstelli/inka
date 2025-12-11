@@ -74,7 +74,7 @@ function Editor({ note }: Props) {
   if (!editor) return null;
 
   return (
-    <div className="w-full overflow-auto [grid-area:editor]">
+    <div className="w-full overflow-auto">
       {editor && <FloatingMenu editor={editor} />}
       <EditorContent editor={editor} />
     </div>

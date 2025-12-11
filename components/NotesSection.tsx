@@ -9,7 +9,7 @@ async function NotesSection() {
   const notes = await getNotes();
 
   return (
-    <section className="[grid-area:notesSection] grid grid-cols-1 divide-y divide-border grid-rows-[50px_50px_1fr_50px]">
+    <section className="max-lg:hidden row-span-2 grid grid-cols-1 grid-rows-[50px_50px_1fr_50px] divide-y">
       <NotesHeading count={notes.length} />
       <NotesSearch />
       <NotesList notes={notes} />

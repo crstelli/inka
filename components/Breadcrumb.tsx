@@ -9,7 +9,7 @@ function Breadcrumb() {
   const savingStatus = useSavingStatus();
 
   return (
-    <div className="flex items-center justify-between px-4 [grid-area:breadcrumb]">
+    <div className="flex items-center justify-between px-4">
       <BreadcrumbComp>
         <BreadcrumbList>
           <BreadcrumbItem>Home</BreadcrumbItem>

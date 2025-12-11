@@ -7,15 +7,19 @@ import { signout } from "@/actions/auth/signout";
 import { useSidebar } from "@/stores/menusStore";
 import { Button } from "@/components/ui/button";
 
-import { LogOut, Settings, StickyNote, Trash } from "lucide-react";
+import { FolderOpen, LogOut, Settings, StickyNote, Trash } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 function Sidebar() {
   const isOpen = useSidebar();
 
   return (
-    <div className={`grid grid-rows-[50px_1fr] divide-y divide-border" ${isOpen ? "lg:w-60" : null}`}>
-      <div></div>
+    <div className={`grid grid-rows-[50px_1fr] divide-y  " ${isOpen ? "lg:w-60" : null}`}>
+      <div className="flex items-center justify-center">
+        <Button size="icon" className="flex items-center justify-center hover:bg-background lg:hidden">
+          <FolderOpen />
+        </Button>
+      </div>
       <div className="bg-accent h-full flex flex-col row-span-3 px-4 py-10 gap-2">
         <Item isOpen={isOpen} icon={StickyNote} altPath="/">
           Notes
