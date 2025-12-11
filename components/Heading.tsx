@@ -1,26 +1,17 @@
-import { Button } from "@/components/ui/button";
-import { Ellipsis, Info, ListChecks, PanelsTopLeft } from "lucide-react";
+import Image from "next/image";
+import { getSession } from "@/lib/auth/auth";
 
-function Heading() {
+async function Heading() {
+  const session = await getSession();
+
   return (
-    <div className="px-4 items-center flex justify-between [grid-area:heading]">
-      <Button size="icon" variant="secondary">
-        <PanelsTopLeft />
-      </Button>
-      <div className="flex items-center gap-1">
-        <Button size="icon" variant="secondary">
-          <Ellipsis />
-        </Button>
-
-        <Button size="icon" variant="secondary">
-          <ListChecks />
-        </Button>
-
-        <Button size="icon" variant="secondary">
-          <Info />
-        </Button>
-
-        <div className="size-9 rounded-full bg-accent flex items-center justify-center pointer-events-none">G</div>
+    <div className="px-4 items-center flex [grid-area:heading]">
+      <div className="flex items-center gap-1 ml-auto">
+        {session.user?.image && (
+          <div className="relative size-9 overflow-hidden rounded-full bg-accent flex items-center justify-center pointer-events-none">
+            <Image src={session.user.image} alt="Profile Picture" fill />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -42,3 +42,10 @@ export async function getUser() {
 
   return user;
 }
+
+export async function getSession() {
+  const session = await auth();
+  if (!session?.user?.email) throw new Error("User not logged in.");
+
+  return session;
+}
