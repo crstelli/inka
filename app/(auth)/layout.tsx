@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { geist } from "@/lib/next/font";
 import { Info } from "lucide-react";
+import { Analytics } from "@vercel/analytics/next";
 import type { ReactNode } from "react";
 
 export { metadata } from "@/lib/next/metadata";
@@ -27,6 +28,7 @@ export default function layout({ children }: Props) {
             {children}
           </main>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
