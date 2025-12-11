@@ -14,7 +14,7 @@ function Sidebar() {
   const isOpen = useSidebar();
 
   return (
-    <div className={`grid grid-rows-[50px_1fr] divide-y divide-border" ${isOpen ? "w-60" : null}`}>
+    <div className={`grid grid-rows-[50px_1fr] divide-y divide-border" ${isOpen ? "lg:w-60" : null}`}>
       <div></div>
       <div className="bg-accent h-full flex flex-col row-span-3 px-4 py-10 gap-2">
         <Item isOpen={isOpen} icon={StickyNote} altPath="/">
@@ -28,7 +28,7 @@ function Sidebar() {
         </Item>
         <Button onClick={signout} variant="ghost" className="justify-start hover:bg-background mt-auto">
           <LogOut />
-          {isOpen && <span>Logout</span>}
+          {isOpen && <span className="max-lg:hidden">Logout</span>}
         </Button>
       </div>
     </div>
@@ -53,7 +53,7 @@ function Item({ children, icon: Icon, altPath, isOpen }: ItemProps) {
     <Button variant={isActive ? "secondary" : "ghost"} className="justify-start hover:bg-background" asChild>
       <Link href={path}>
         <Icon />
-        {isOpen && <span>{children}</span>}
+        {isOpen && <span className="max-lg:hidden">{children}</span>}
       </Link>
     </Button>
   );
