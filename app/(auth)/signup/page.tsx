@@ -55,14 +55,14 @@ export default async function page() {
             </FieldSet>
             <FieldSet className="mt-6">
               <Field>
-                <Button type="submit">
+                <Button type="submit" disabled>
                   <Link href="/login">Sign Up</Link>
                 </Button>
               </Field>
             </FieldSet>
           </CardContent>
         </Card>
-        <span className="text-center mx-auto mt-2">
+        <span className="text-center mx-auto mt-4">
           You have an account?{" "}
           <Link href="/login" className="underline">
             Login

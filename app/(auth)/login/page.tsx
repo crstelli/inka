@@ -10,8 +10,7 @@ import { Field, FieldSet } from "@/components/ui/field";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 
-import { Info, KeyRound, Mail } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { KeyRound, Mail } from "lucide-react";
 
 export default async function page() {
   const user = await getCurrentUser();
@@ -19,11 +18,6 @@ export default async function page() {
 
   return (
     <>
-      <Alert className="w-auto">
-        <Info />
-        <AlertTitle>Welcome to Inka</AlertTitle>
-        <AlertDescription>Login with credentials is currently disabled, please login with Google</AlertDescription>
-      </Alert>
       <div className="text-center">
         <h1 className="text-4xl">Inka</h1>
         <h2 className="text-secondary">A modern taking-note app.</h2>
@@ -62,7 +56,7 @@ export default async function page() {
               </FieldSet>
             </CardContent>
           </Card>
-          <span className="text-center mx-auto mt-2">
+          <span className="text-center mx-auto mt-4">
             You don&apos;t have an account?{" "}
             <Link href="/signup" className="underline">
               Sign Up
