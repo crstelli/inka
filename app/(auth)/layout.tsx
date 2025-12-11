@@ -14,7 +14,7 @@ export default function layout({ children }: Props) {
     <html lang="en" suppressHydrationWarning>
       <body className={`w-screen h-screen ${geist.className}`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main className="w-full h-full flex flex-col gap-10 items-center justify-center">{children}</main>
+          <main className="w-full h-full flex flex-col gap-5 py-5 items-center max-w-[95%] mx-auto">{children}</main>
         </ThemeProvider>
       </body>
     </html>
