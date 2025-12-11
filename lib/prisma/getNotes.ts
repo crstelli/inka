@@ -12,6 +12,7 @@ export async function getNotes({ trash = false }: Params = {}) {
   const notesInfo: NoteInfo[] = await prisma.note.findMany({
     where: { user_id: user.id, trash },
     select: { id: true, title: true, description: true, updated_at: true, created_at: true },
+    orderBy: [{ created_at: "desc" }],
   });
 
   return notesInfo;
