@@ -32,7 +32,7 @@ function Note({ note }: Props) {
         <DropdownMenu>
           <div
             onClick={handleClick}
-            className={`h-25 group rounded-md p-3 border flex flex-col cursor-pointer ${
+            className={`h-25 group max-w-[400px] w-full mx-auto rounded-md p-3 border flex flex-col cursor-pointer ${
               isOpen ? "bg-background" : "bg-accent border-transparent"
             }`}
           >

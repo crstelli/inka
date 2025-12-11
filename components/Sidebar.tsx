@@ -4,18 +4,30 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 import { signout } from "@/actions/auth/signout";
-import { useSidebar } from "@/stores/menusStore";
+import { useSidebar, useToggleNotesList } from "@/stores/menusStore";
 import { Button } from "@/components/ui/button";
 
-import { LogOut, Settings, StickyNote, Trash } from "lucide-react";
+import { FolderOpen, LogOut, Settings, StickyNote, Trash } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 function Sidebar() {
+  const pathname = usePathname();
   const isOpen = useSidebar();
+  const toggleNotesList = useToggleNotesList();
 
   return (
-    <div className={`grid grid-rows-[50px_1fr] divide-y divide-border" ${isOpen ? "w-60" : null}`}>
-      <div></div>
+    <div className={`grid grid-rows-[50px_1fr] divide-y  " ${isOpen ? "lg:w-60" : null}`}>
+      <div className="flex items-center justify-center">
+        {pathname === "/" && (
+          <Button
+            onClick={toggleNotesList}
+            size="icon"
+            className="flex items-center justify-center hover:bg-background lg:hidden"
+          >
+            <FolderOpen />
+          </Button>
+        )}
+      </div>
       <div className="bg-accent h-full flex flex-col row-span-3 px-4 py-10 gap-2">
         <Item isOpen={isOpen} icon={StickyNote} altPath="/">
           Notes
@@ -28,7 +40,7 @@ function Sidebar() {
         </Item>
         <Button onClick={signout} variant="ghost" className="justify-start hover:bg-background mt-auto">
           <LogOut />
-          {isOpen && <span>Logout</span>}
+          {isOpen && <span className="max-lg:hidden">Logout</span>}
         </Button>
       </div>
     </div>
@@ -53,7 +65,7 @@ function Item({ children, icon: Icon, altPath, isOpen }: ItemProps) {
     <Button variant={isActive ? "secondary" : "ghost"} className="justify-start hover:bg-background" asChild>
       <Link href={path}>
         <Icon />
-        {isOpen && <span>{children}</span>}
+        {isOpen && <span className="max-lg:hidden">{children}</span>}
       </Link>
     </Button>
   );

@@ -53,7 +53,7 @@ function Editor({ note }: Props) {
     ],
     editorProps: {
       attributes: {
-        class: "py-8 px-16",
+        class: "py-4 lg:py-8 px-6 lg:px-16",
       },
     },
 
@@ -74,7 +74,7 @@ function Editor({ note }: Props) {
   if (!editor) return null;
 
   return (
-    <div className="w-full overflow-auto [grid-area:editor]">
+    <div className="w-full overflow-auto">
       {editor && <FloatingMenu editor={editor} />}
       <EditorContent editor={editor} />
     </div>
