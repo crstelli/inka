@@ -9,7 +9,7 @@ async function TrashNotesList() {
       {trashNotes.length > 0 ? (
         trashNotes.map((n) => <TrashNote note={n} key={n.id} />)
       ) : (
-        <p className="text-center">The trash is empty.</p>
+        <p className="text-center text-secondary">The trash is empty.</p>
       )}
     </div>
   );
