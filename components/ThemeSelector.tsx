@@ -8,7 +8,7 @@ function ThemeSelector() {
 
   return (
     <Select value={theme} onValueChange={(t) => setTheme(t)}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-35 lg:w-50">
         <SelectValue placeholder="Choose a theme" />
       </SelectTrigger>
       <SelectContent>
