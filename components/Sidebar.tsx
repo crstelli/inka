@@ -11,19 +11,22 @@ import { FolderOpen, LogOut, Settings, StickyNote, Trash } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 function Sidebar() {
+  const pathname = usePathname();
   const isOpen = useSidebar();
   const toggleNotesList = useToggleNotesList();
 
   return (
     <div className={`grid grid-rows-[50px_1fr] divide-y  " ${isOpen ? "lg:w-60" : null}`}>
       <div className="flex items-center justify-center">
-        <Button
-          onClick={toggleNotesList}
-          size="icon"
-          className="flex items-center justify-center hover:bg-background lg:hidden"
-        >
-          <FolderOpen />
-        </Button>
+        {pathname === "/" && (
+          <Button
+            onClick={toggleNotesList}
+            size="icon"
+            className="flex items-center justify-center hover:bg-background lg:hidden"
+          >
+            <FolderOpen />
+          </Button>
+        )}
       </div>
       <div className="bg-accent h-full flex flex-col row-span-3 px-4 py-10 gap-2">
         <Item isOpen={isOpen} icon={StickyNote} altPath="/">
