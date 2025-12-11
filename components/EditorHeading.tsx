@@ -23,7 +23,7 @@ function EditorHeading({ note }: Props) {
   }
 
   return (
-    <div className="bg-accent flex items-center justify-between px-12">
+    <div className="bg-accent flex items-center justify-between px-4 lg:px-12">
       {note && (
         <div className="flex items-center gap-4">
           {isEditing ? (

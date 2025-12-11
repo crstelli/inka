@@ -53,7 +53,7 @@ function Editor({ note }: Props) {
     ],
     editorProps: {
       attributes: {
-        class: "py-8 px-16",
+        class: "py-4 lg:py-8 px-6 lg:px-16",
       },
     },
 
