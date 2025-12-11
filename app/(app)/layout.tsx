@@ -3,6 +3,7 @@ import { geist } from "@/lib/next/font";
 
 import { getCurrentUser } from "@/lib/prisma/getCurrentUser";
 import { redirect, RedirectType } from "next/navigation";
+import { Analytics } from "@vercel/analytics/next";
 
 import { Sidebar } from "@/components/Sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -27,6 +28,7 @@ export default async function RootLayout({ children }: Props) {
             {children}
           </main>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
