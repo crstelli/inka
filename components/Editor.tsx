@@ -20,7 +20,7 @@ interface Props {
   note: Note | null;
 }
 
-function Editor({ note }: Props) {
+export default function Editor({ note }: Props) {
   const setSavingStatus = useSetSavingStatus();
   const setOpenNote = useSetOpenNote();
 
@@ -80,5 +80,3 @@ function Editor({ note }: Props) {
     </div>
   );
 }
-
-export { Editor };
