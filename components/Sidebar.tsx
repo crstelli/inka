@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 import { signout } from "@/actions/auth/signout";
-import { useSidebar } from "@/stores/menusStore";
+import { useSidebar, useToggleNotesList } from "@/stores/menusStore";
 import { Button } from "@/components/ui/button";
 
 import { FolderOpen, LogOut, Settings, StickyNote, Trash } from "lucide-react";
@@ -12,11 +12,16 @@ import type { LucideIcon } from "lucide-react";
 
 function Sidebar() {
   const isOpen = useSidebar();
+  const toggleNotesList = useToggleNotesList();
 
   return (
     <div className={`grid grid-rows-[50px_1fr] divide-y  " ${isOpen ? "lg:w-60" : null}`}>
       <div className="flex items-center justify-center">
-        <Button size="icon" className="flex items-center justify-center hover:bg-background lg:hidden">
+        <Button
+          onClick={toggleNotesList}
+          size="icon"
+          className="flex items-center justify-center hover:bg-background lg:hidden"
+        >
           <FolderOpen />
         </Button>
       </div>
