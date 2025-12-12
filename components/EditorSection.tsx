@@ -20,7 +20,7 @@ function EditorSection() {
   const note = useNote();
 
   return (
-    <section className="grid-rows-[50px_1fr_50px] grid divide-y">
+    <section className="grid-rows-[50px_1fr_50px] overflow-auto grid divide-y">
       <EditorHeading key={note?.id} note={note} />
       <Editor note={note} />
       <Breadcrumb />

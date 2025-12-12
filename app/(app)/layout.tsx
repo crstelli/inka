@@ -21,7 +21,7 @@ export default async function RootLayout({ children }: Props) {
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`w-screen h-screen ${geist.className}`}>
+      <body className={`max-w-screen h-screen ${geist.className}`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className="w-full h-full grid grid-cols-[auto_10fr] grid-rows-1 divide-x">
             <Sidebar />
