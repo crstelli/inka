@@ -170,6 +170,14 @@
     @apply flex gap-2 items-start;
   }
 
+  pre {
+    @apply bg-card p-2 my-4;
+  }
+
+  hr {
+    @apply my-6;
+  }
+
   .is-editor-empty:first-child::before {
     @apply text-muted-foreground float-left h-0 pointer-events-none italic;
     content: attr(data-placeholder);
