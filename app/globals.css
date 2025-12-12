@@ -170,6 +170,10 @@
     @apply flex gap-2 items-start;
   }
 
+  ol {
+    @apply list-decimal list-outside ms-4 my-2;
+  }
+
   pre {
     @apply bg-card p-2 my-4;
   }
